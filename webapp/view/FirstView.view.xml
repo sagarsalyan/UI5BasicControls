@@ -15,7 +15,7 @@
 							<SegmentedButton selectedKey="kids">
 								<items>
 									<SegmentedButtonItem text="Kids" key="kids" press="onKidPress"/>
-									<SegmentedButtonItem text="Adults"/>
+									<SegmentedButtonItem text="Adultss"/>
 									<SegmentedButtonItem text="Seniors"/>
 								</items>
 							</SegmentedButton>
