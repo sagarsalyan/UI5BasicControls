@@ -61,7 +61,7 @@ sap.ui.define([
 		},
 
 		// Menu
-			handlePressOpenMenu: function (oEvent) {
+		handlePressOpenMenu: function (oEvent) {
 			var oButton = oEvent.getSource();
 
 			// create menu only once
@@ -93,9 +93,21 @@ sap.ui.define([
 			debugger;
 		},
 		// Menu
-		onSecond : function(){
+		onApiCall: function () {
+			debugger;
+			$.ajax({
+				url: "https://my-json-server.typicode.com/sagarsalyan/fake-json/profiles",
+				success: function (result) {
+					debugger;
+				},
+				error :function(err){
+					debugger;
+				}
+			});
+		},
+		onSecond: function () {
 			var route = new sap.ui.core.UIComponent.getRouterFor(this);
-			route.navTo("Second",true);
+			route.navTo("Second", true);
 		},
 		onAfterRendering: function () {
 			var inp = this.getView().byId("name");
