@@ -1,6 +1,7 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/ui/core/EventBus"
+	"sap/ui/core/EventBus",
+	"BasicControls/BasicControls/js/demo"
 ], function (Controller, EventBus) {
 	"use strict";
 
