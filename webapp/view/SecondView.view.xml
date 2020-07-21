@@ -11,6 +11,43 @@
 							<Button text="DownloadSpreedSheet" press="onDownloadSS"/>
 						</HBox>
 						<Table id="idResultsTablem" mode="MultiSelect" sticky="HeaderToolbar,ColumnHeaders"></Table>
+						<HBox>
+						<!--Table for row addition-->
+						<Table headerText="Mathematical Operation" sticky="ColumnHeaders"  popinLayout="Block">
+							<columns>
+								<Column>
+									<Text text="Value1"/>
+								</Column>
+								<Column>
+									<Text text="Operation"/>
+								</Column>
+								<Column>
+									<Text text="Value2"/>
+								</Column>
+								<Column>
+									<Text text="Result"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Input/>
+										<Text text="+"/>
+										<Input/>
+										<Input/>
+									</cells>
+								</ColumnListItem>
+								<ColumnListItem>
+									<cells>
+										<Input/>
+										<Text text="+"/>
+										<Input/>
+										<Input/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+						</HBox>
 					</VBox>
 				</content>
 			</Page>
