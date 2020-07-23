@@ -14,9 +14,23 @@ sap.ui.define([
 		 * @memberOf BasicControls.BasicControls.view.SecondView
 		 */
 		onInit: function () {
-
+			debugger
 			var router = sap.ui.core.UIComponent.getRouterFor(this);
 			router.attachRoutePatternMatched(this._handleRouteMatched, this);
+			
+			var rows = [
+				{
+					exp:"+"
+				},{
+					exp:"-"
+				},{
+					exp:"x"
+				},{
+					exp:"/"
+				},
+			]
+			var oRows = new sap.ui.model.json.JSONModel(rows);
+			this.getView().byId("mathTable").setModel(oRows,"oRows")
 		},
 
 		_handleRouteMatched: function (oEvent) {
@@ -305,6 +319,19 @@ sap.ui.define([
 			}
 			 res = isNaN(res) ? 0 : res;
 			 oEvent.getSource().getParent().getCells()[3].setValue(res);
+		},
+		onClear:function(oEvent){
+			debugger
+			//with RowID
+			var rowId = oEvent.getSource().getId().split("-")[4]
+			this.getView().byId("mathTable").getItems()[rowId].getCells()[0].setValue("")
+			this.getView().byId("mathTable").getItems()[rowId].getCells()[2].setValue("")
+			this.getView().byId("mathTable").getItems()[rowId].getCells()[3].setValue("")
+			
+			//without RowID
+			// oEvent.getSource().getParent().getCells()[0].setValue("")
+			// oEvent.getSource().getParent().getCells()[2].setValue("")
+			// oEvent.getSource().getParent().getCells()[3].setValue("")
 		}
 
 		/**

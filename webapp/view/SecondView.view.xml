@@ -13,7 +13,7 @@
 						<Table id="idResultsTablem" mode="MultiSelect" sticky="HeaderToolbar,ColumnHeaders"></Table>
 						<HBox>
 						<!--Table for row addition-->
-						<Table headerText="Mathematical Operation" sticky="ColumnHeaders"  popinLayout="Block">
+						<Table id = "mathTable" headerText="Mathematical Operation" sticky="ColumnHeaders" items="{oRows>/}"  popinLayout="Block">
 							<columns>
 								<Column>
 									<Text text="Value1"/>
@@ -27,40 +27,47 @@
 								<Column>
 									<Text text="Result"/>
 								</Column>
+								<Column>
+									<Text text="Action"/>
+								</Column>
 							</columns>
 							<items>
 								<ColumnListItem>
 									<cells>
 										<Input liveChange="onLiveChange"/>
-										<Text text="+"/>
+										<Text text="{oRows>exp}"/>
 										<Input liveChange="onLiveChange"/>
 										<Input/>
+										<Button text="Clear" press="onClear"/>
 									</cells>
 								</ColumnListItem>
-								<ColumnListItem>
-									<cells>
-										<Input liveChange="onLiveChange"/>
-										<Text text="-"/>
-										<Input liveChange="onLiveChange"/>
-										<Input/>
-									</cells>
-								</ColumnListItem>
-								<ColumnListItem>
-									<cells>
-										<Input liveChange="onLiveChange"/>
-										<Text text="x"/>
-										<Input liveChange="onLiveChange"/>
-										<Input/>
-									</cells>
-								</ColumnListItem>
-								<ColumnListItem>
-									<cells>
-										<Input liveChange="onLiveChange"/>
-										<Text text="/"/>
-										<Input liveChange="onLiveChange"/>
-										<Input/>
-									</cells>
-								</ColumnListItem>
+								<!--<ColumnListItem>-->
+								<!--	<cells>-->
+								<!--		<Input liveChange="onLiveChange"/>-->
+								<!--		<Text text="-"/>-->
+								<!--		<Input liveChange="onLiveChange"/>-->
+								<!--		<Input/>-->
+								<!--		<Button text="Clear" press="onClear"/>-->
+								<!--	</cells>-->
+								<!--</ColumnListItem>-->
+								<!--<ColumnListItem>-->
+								<!--	<cells>-->
+								<!--		<Input liveChange="onLiveChange"/>-->
+								<!--		<Text text="x"/>-->
+								<!--		<Input liveChange="onLiveChange"/>-->
+								<!--		<Input/>-->
+								<!--		<Button text="Clear" press="onClear"/>-->
+								<!--	</cells>-->
+								<!--</ColumnListItem>-->
+								<!--<ColumnListItem>-->
+								<!--	<cells>-->
+								<!--		<Input liveChange="onLiveChange"/>-->
+								<!--		<Text text="/"/>-->
+								<!--		<Input liveChange="onLiveChange"/>-->
+								<!--		<Input/>-->
+								<!--		<Button text="Clear" press="onClear"/>-->
+								<!--	</cells>-->
+								<!--</ColumnListItem>-->
 							</items>
 						</Table>
 						</HBox>
