@@ -3,7 +3,7 @@ sap.ui.define([
 	"sap/ui/core/util/Export",
 	"sap/ui/core/util/ExportTypeCSV",
 	'sap/ui/export/Spreadsheet'
-], function (Controller, Export, ExportTypeCSV,Spreadsheet) {
+], function (Controller, Export, ExportTypeCSV, Spreadsheet) {
 	"use strict";
 
 	return Controller.extend("BasicControls.BasicControls.controller.SecondView", {
@@ -241,44 +241,70 @@ sap.ui.define([
 			debugger;
 			var aCols, oSettings, oSheet;
 			// aCols = this.createColumnConfig();
-				var aCols = [];
+			var aCols = [];
 
-				aCols.push({
-					label: 'FirstName',
-					property: 'firstname',
-					type: 'string'
-				});
+			aCols.push({
+				label: 'FirstName',
+				property: 'firstname',
+				type: 'string'
+			});
 
-				aCols.push({
-					label: 'Lastname',
-					property: 'lastname',
-					type: 'string'
-				});
+			aCols.push({
+				label: 'Lastname',
+				property: 'lastname',
+				type: 'string'
+			});
 
-				aCols.push({
-					label: 'Dept',
-					property: 'dept',
-					type: 'string'
-				});
+			aCols.push({
+				label: 'Dept',
+				property: 'dept',
+				type: 'string'
+			});
 
-				aCols.push({
-					label: 'DOB',
-					property: 'dob',
-					type: 'date'
-				});
-			var oModel= this.getView().byId("idResultsTablem").getModel();
+			aCols.push({
+				label: 'DOB',
+				property: 'dob',
+				type: 'date'
+			});
+			var oModel = this.getView().byId("idResultsTablem").getModel();
 			oSettings = {
-				workbook: { columns: aCols },
+				workbook: {
+					columns: aCols
+				},
 				dataSource: oModel.getData().rows
 			};
 			oSheet = new Spreadsheet(oSettings);
 			oSheet.build()
-				.then( function() {
+				.then(function () {
 					sap.m.MessageToast.show('Template downloaded. Please fill the sheet and upload');
 				})
-				.finally(function() {
-				oSheet.destroy();
-			});
+				.finally(function () {
+					oSheet.destroy();
+				});
+		},
+		onLiveChange: function (oEvent) {
+			debugger
+			var val1 = parseInt(oEvent.getSource().getParent().getCells()[0].getValue());
+			var val2 = parseInt(oEvent.getSource().getParent().getCells()[2].getValue());
+			var exp = oEvent.getSource().getParent().getCells()[1].getText();
+			var res;
+
+			switch (exp) {
+			case "+":
+				res =  val1 + val2;
+				break;
+			case "-":
+				res =  val1 - val2;
+				break;
+			case "x":
+				res =  val1 * val2;
+				break;
+			case "/":
+				res =  val1 / val2;
+				break;
+			}
+			 res = isNaN(res) ? 0 : res;
+			 oEvent.getSource().getParent().getCells()[3].setValue(res);
 		}
 
 		/**

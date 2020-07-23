@@ -31,17 +31,33 @@
 							<items>
 								<ColumnListItem>
 									<cells>
-										<Input/>
+										<Input liveChange="onLiveChange"/>
 										<Text text="+"/>
-										<Input/>
+										<Input liveChange="onLiveChange"/>
 										<Input/>
 									</cells>
 								</ColumnListItem>
 								<ColumnListItem>
 									<cells>
+										<Input liveChange="onLiveChange"/>
+										<Text text="-"/>
+										<Input liveChange="onLiveChange"/>
 										<Input/>
-										<Text text="+"/>
+									</cells>
+								</ColumnListItem>
+								<ColumnListItem>
+									<cells>
+										<Input liveChange="onLiveChange"/>
+										<Text text="x"/>
+										<Input liveChange="onLiveChange"/>
 										<Input/>
+									</cells>
+								</ColumnListItem>
+								<ColumnListItem>
+									<cells>
+										<Input liveChange="onLiveChange"/>
+										<Text text="/"/>
+										<Input liveChange="onLiveChange"/>
 										<Input/>
 									</cells>
 								</ColumnListItem>
