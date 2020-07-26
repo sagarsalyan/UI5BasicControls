@@ -311,7 +311,7 @@ sap.ui.define([
 		onSend: function (oEvent) {
 			debugger
 			var selectedData = this.getView().byId("idResultsTablem").getSelectedItems().map(data => data.getBindingContext().getObject());
-
+			alert(JSON.stringify(selectedData))
 			// or
 
 			var selectedData2;
