@@ -17,20 +17,18 @@ sap.ui.define([
 			debugger
 			var router = sap.ui.core.UIComponent.getRouterFor(this);
 			router.attachRoutePatternMatched(this._handleRouteMatched, this);
-			
-			var rows = [
-				{
-					exp:"+"
-				},{
-					exp:"-"
-				},{
-					exp:"x"
-				},{
-					exp:"/"
-				},
-			]
+
+			var rows = [{
+				exp: "+"
+			}, {
+				exp: "-"
+			}, {
+				exp: "x"
+			}, {
+				exp: "/"
+			}, ]
 			var oRows = new sap.ui.model.json.JSONModel(rows);
-			this.getView().byId("mathTable").setModel(oRows,"oRows")
+			this.getView().byId("mathTable").setModel(oRows, "oRows")
 		},
 
 		_handleRouteMatched: function (oEvent) {
@@ -119,12 +117,17 @@ sap.ui.define([
 				new sap.m.Column({
 					header: new sap.m.Text({
 						text: "LastName"
+					})
+				}),
+				new sap.m.Column({
+					header: new sap.m.Text({
+						text: "Dept"
 					}),
 					mergeDuplicates: true
 				}),
 				new sap.m.Column({
 					header: new sap.m.Text({
-						text: "Dept"
+						text: "Mark"
 					})
 				}),
 				new sap.m.Column({
@@ -144,31 +147,37 @@ sap.ui.define([
 						"firstname": "Sagar",
 						"lastname": "Salyan",
 						"dept": "Comp.Sci.",
+						"mark": 80,
 						"dob": new Date()
 					}, {
 						"firstname": "Sunil",
 						"lastname": "Poojari",
 						"dept": "Comp.Sci.",
+						"mark": 90,
 						"dob": new Date()
 					}, {
 						"firstname": "Shiva",
 						"lastname": "Poojari",
 						"dept": "Comp.Sci.",
+						"mark": 70,
 						"dob": new Date()
 					}, {
 						"firstname": "Rakshi",
 						"lastname": "Kulal",
 						"dept": "Comp.Sci.",
+						"mark": 80,
 						"dob": new Date()
 					}, {
 						"firstname": "Karan",
 						"lastname": "Rathod",
 						"dept": "Comp.Sci.",
+						"mark": 60,
 						"dob": new Date()
 					}, {
 						"firstname": "Swasthik",
 						"lastname": "Bhat",
 						"dept": "Comp.Sci.",
+						"mark": 50,
 						"dob": new Date()
 					}
 				]
@@ -185,6 +194,9 @@ sap.ui.define([
 				}),
 				new sap.m.Text({
 					text: "{dept}"
+				}),
+				new sap.m.Text({
+					text: "{mark}"
 				}),
 				new sap.m.Text({
 					text: {
@@ -296,18 +308,27 @@ sap.ui.define([
 					oSheet.destroy();
 				});
 		},
-		onSend:function(oEvent){
+		onSend: function (oEvent) {
 			debugger
 			var selectedData = this.getView().byId("idResultsTablem").getSelectedItems().map(data => data.getBindingContext().getObject());
-			
+
 			// or
-			
+
 			var selectedData2;
 			var data = this.getView().byId("idResultsTablem").getSelectedItems()
-			// for loop
+				// for loop
 		},
-		onSelectionChange:function(oEvent){
-			debugger	
+		onSelectionChange: function (oEvent) {
+			debugger
+		},
+		onTotal: function (oEvent) {
+			debugger
+			var selectedData = this.getView().byId("idResultsTablem").getSelectedItems().map(data => data.getBindingContext().getObject());
+			var total = selectedData.reduce((acc, cur) => {
+				return {mark:acc.mark+cur.mark}
+			})  
+			var mark = total.mark
+			alert(mark)
 		},
 		onLiveChange: function (oEvent) {
 			debugger
@@ -318,29 +339,29 @@ sap.ui.define([
 
 			switch (exp) {
 			case "+":
-				res =  val1 + val2;
+				res = val1 + val2;
 				break;
 			case "-":
-				res =  val1 - val2;
+				res = val1 - val2;
 				break;
 			case "x":
-				res =  val1 * val2;
+				res = val1 * val2;
 				break;
 			case "/":
-				res =  val1 / val2;
+				res = val1 / val2;
 				break;
 			}
-			 res = isNaN(res) ? 0 : res;
-			 oEvent.getSource().getParent().getCells()[3].setValue(res);
+			res = isNaN(res) ? 0 : res;
+			oEvent.getSource().getParent().getCells()[3].setValue(res);
 		},
-		onClear:function(oEvent){
+		onClear: function (oEvent) {
 			debugger
 			//with RowID
 			var rowId = oEvent.getSource().getId().split("-")[4]
 			this.getView().byId("mathTable").getItems()[rowId].getCells()[0].setValue("")
 			this.getView().byId("mathTable").getItems()[rowId].getCells()[2].setValue("")
 			this.getView().byId("mathTable").getItems()[rowId].getCells()[3].setValue("")
-			
+
 			//without RowID
 			// oEvent.getSource().getParent().getCells()[0].setValue("")
 			// oEvent.getSource().getParent().getCells()[2].setValue("")

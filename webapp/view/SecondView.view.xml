@@ -11,9 +11,12 @@
 							<Button text="DownloadSpreedSheet" press="onDownloadSS"/>
 						</HBox>
 						<Table id="idResultsTablem" selectionChange="onSelectionChange" mode="MultiSelect" sticky="HeaderToolbar,ColumnHeaders"></Table>
-						<Button text="Send" press="onSend"/>
+						<HBox>
+							<Button text="Send" press="onSend"/>
+							<Button text="Total Mark" press="onTotal"/>
+						</HBox>
 						<!--Table for row addition-->
-						<Table id = "mathTable" headerText="Mathematical Operation" sticky="ColumnHeaders" items="{oRows>/}"  popinLayout="Block">
+						<Table id="mathTable" headerText="Mathematical Operation" sticky="ColumnHeaders" items="{oRows>/}" popinLayout="Block">
 							<columns>
 								<Column>
 									<Text text="Value1"/>
