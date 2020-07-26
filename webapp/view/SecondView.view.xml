@@ -10,8 +10,8 @@
 							<Button text="DownloadCSV" press="onDownloadCSV"/>
 							<Button text="DownloadSpreedSheet" press="onDownloadSS"/>
 						</HBox>
-						<Table id="idResultsTablem" mode="MultiSelect" sticky="HeaderToolbar,ColumnHeaders"></Table>
-						<HBox>
+						<Table id="idResultsTablem" selectionChange="onSelectionChange" mode="MultiSelect" sticky="HeaderToolbar,ColumnHeaders"></Table>
+						<Button text="Send" press="onSend"/>
 						<!--Table for row addition-->
 						<Table id = "mathTable" headerText="Mathematical Operation" sticky="ColumnHeaders" items="{oRows>/}"  popinLayout="Block">
 							<columns>
@@ -70,7 +70,6 @@
 								<!--</ColumnListItem>-->
 							</items>
 						</Table>
-						</HBox>
 					</VBox>
 				</content>
 			</Page>

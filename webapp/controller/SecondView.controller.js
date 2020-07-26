@@ -146,28 +146,28 @@ sap.ui.define([
 						"dept": "Comp.Sci.",
 						"dob": new Date()
 					}, {
-						"firstname": "Sagar",
-						"lastname": "Salyan",
+						"firstname": "Sunil",
+						"lastname": "Poojari",
 						"dept": "Comp.Sci.",
 						"dob": new Date()
 					}, {
-						"firstname": "Sagar",
-						"lastname": "Salyan",
+						"firstname": "Shiva",
+						"lastname": "Poojari",
 						"dept": "Comp.Sci.",
 						"dob": new Date()
 					}, {
-						"firstname": "Sagar",
-						"lastname": "Salyan",
+						"firstname": "Rakshi",
+						"lastname": "Kulal",
 						"dept": "Comp.Sci.",
 						"dob": new Date()
 					}, {
-						"firstname": "Sagar",
-						"lastname": "Salyan",
+						"firstname": "Karan",
+						"lastname": "Rathod",
 						"dept": "Comp.Sci.",
 						"dob": new Date()
 					}, {
-						"firstname": "Sagar",
-						"lastname": "Salyan",
+						"firstname": "Swasthik",
+						"lastname": "Bhat",
 						"dept": "Comp.Sci.",
 						"dob": new Date()
 					}
@@ -295,6 +295,19 @@ sap.ui.define([
 				.finally(function () {
 					oSheet.destroy();
 				});
+		},
+		onSend:function(oEvent){
+			debugger
+			var selectedData = this.getView().byId("idResultsTablem").getSelectedItems().map(data => data.getBindingContext().getObject());
+			
+			// or
+			
+			var selectedData2;
+			var data = this.getView().byId("idResultsTablem").getSelectedItems()
+			// for loop
+		},
+		onSelectionChange:function(oEvent){
+			debugger	
 		},
 		onLiveChange: function (oEvent) {
 			debugger
