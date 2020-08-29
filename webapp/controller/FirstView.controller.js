@@ -1,8 +1,9 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/core/EventBus",
+	"sap/ui/core/Fragment",
 	"BasicControls/BasicControls/js/demo"
-], function (Controller, EventBus) {
+], function (Controller, EventBus,Fragment) {
 	"use strict";
 
 	return Controller.extend("BasicControls.BasicControls.controller.FirstView", {
@@ -76,6 +77,24 @@ sap.ui.define([
 
 			var eDock = sap.ui.core.Popup.Dock;
 			this._menu.open(this._bKeyboard, oButton, eDock.BeginTop, eDock.BeginBottom, oButton);
+		},
+		onPopoverPress: function (oEvent) {
+			var oButton = oEvent.getSource();
+
+			// create popover
+			if (!this._oPopover) {
+				Fragment.load({
+					name: "BasicControls.BasicControls.fragments.Popover",
+					controller: this
+				}).then(function(pPopover) {
+					this._oPopover = pPopover;
+					this.getView().addDependent(this._oPopover);
+					// this._oPopover.bindElement("/ProductCollection/0");
+					this._oPopover.openBy(oButton);
+				}.bind(this));
+			} else {
+				this._oPopover.openBy(oButton);
+			}
 		},
 
 		handleMenuItemPress: function (oEvent) {
