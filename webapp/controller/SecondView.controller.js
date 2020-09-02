@@ -312,7 +312,7 @@ sap.ui.define([
 			debugger
 			var selectedData = this.getView().byId("idResultsTablem").getSelectedItems().map(data => data.getBindingContext().getObject());
 			alert(JSON.stringify(selectedData))
-			// or
+				// or
 
 			var selectedData2;
 			var data = this.getView().byId("idResultsTablem").getSelectedItems()
@@ -325,8 +325,10 @@ sap.ui.define([
 			debugger
 			var selectedData = this.getView().byId("idResultsTablem").getSelectedItems().map(data => data.getBindingContext().getObject());
 			var total = selectedData.reduce((acc, cur) => {
-				return {mark:acc.mark+cur.mark}
-			})  
+				return {
+					mark: acc.mark + cur.mark
+				}
+			})
 			var mark = total.mark
 			alert(mark)
 		},
@@ -366,6 +368,23 @@ sap.ui.define([
 			// oEvent.getSource().getParent().getCells()[0].setValue("")
 			// oEvent.getSource().getParent().getCells()[2].setValue("")
 			// oEvent.getSource().getParent().getCells()[3].setValue("")
+		},
+		onDocPress: function () {
+			var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' " +
+				"xmlns:w='urn:schemas-microsoft-com:office:word' " +
+				"xmlns='http://www.w3.org/TR/REC-html40'>" +
+				"<head><meta charset='utf-8'><title>Export HTML to Word Document with JavaScript</title></head><body>";
+			var footer = "</body></html>";
+			// var sourceHTML = header + document.getElementById("SimpleFormChange354").innerHTML + footer;
+			var sourceHTML = header + this.getView().byId("SimpleFormChange354").$().html() + footer;
+
+			var source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
+			var fileDownload = document.createElement("a");
+			document.body.appendChild(fileDownload);
+			fileDownload.href = source;
+			fileDownload.download = 'document.doc';
+			fileDownload.click();
+			document.body.removeChild(fileDownload);
 		}
 
 		/**
