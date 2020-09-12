@@ -88,10 +88,10 @@
 					]
 				},
 				{
-					"name":"Second",
+					"name": "Second",
 					"pattern": "Second",
-					"target":"SecondView"
-				}	
+					"target": "SecondView"
+				}
 			],
 			"targets": {
 				"TargetFirstView": {
@@ -104,6 +104,14 @@
 				"SecondView": {
 					"viewType": "XML",
 					"viewName": "SecondView"
+				},
+				"AvailableProduct": {
+					"viewType": "XML",
+					"viewName": "AvailableProduct"
+				},
+				"SelectedProduct": {
+					"viewType": "XML",
+					"viewName": "SelectedProduct"
 				}
 			}
 		}

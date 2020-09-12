@@ -107,6 +107,215 @@
 								</f:content>
 							</f:SimpleForm>
 						</VBox>
+						<VBox class="sapUiSmallMargin">
+							<f:SimpleForm id="SimpleFormChange355" layout="ResponsiveGridLayout" editable="true" title="ANALYSIS REQUEST FORM">
+								<f:content>
+									<Label text="Requester">
+										<layoutData>
+											<l:GridData span="XL1 L3 M2 S4"/>
+										</layoutData>
+									</Label>
+									<Input id="req" value="Sagar">
+										<layoutData>
+											<l:GridData span="XL1 L3 M2 S4"/>
+										</layoutData>
+									</Input>
+									<Label text="Date">
+										<layoutData>
+											<l:GridData span="XL1 L3 M2 S4"/>
+										</layoutData>
+									</Label>
+									<DatePicker id="date">
+										<layoutData>
+											<l:GridData span="XL1 L3 M2 S4"/>
+										</layoutData>
+									</DatePicker>
+									<Label text="Contact for result">
+										<layoutData>
+											<l:GridData span="XL1 L3 M2 S4"/>
+										</layoutData>
+									</Label>
+									<Input id="contact" value="something">
+										<layoutData>
+											<l:GridData span="XL1 L3 M2 S4"/>
+										</layoutData>
+									</Input>
+									<Label text="Sample description">
+										<layoutData>
+											<l:GridData span="XL1 L3 M2 S4"/>
+										</layoutData>
+									</Label>
+									<Input id="sample" value="something">
+										<layoutData>
+											<l:GridData span="XL1 L3 M2 S4"/>
+										</layoutData>
+									</Input>
+									<Label text="Physical Analysis">
+										<layoutData>
+											<l:GridData span="XL1 L3 M2 S4"/>
+										</layoutData>
+									</Label>
+									<VBox>
+										<CheckBox id="fss" text="FSS"/>
+										<CheckBox id="lfss" text="Lab milled FSS"/>
+										<CheckBox id="psd" text="Malvern PSD"/>
+										<CheckBox id="hall" text="Hall Flow"/>
+										<layoutData>
+											<l:GridData span="XL1 L3 M2 S4"/>
+										</layoutData>
+									</VBox>
+									<VBox>
+										<CheckBox id="app" text="App Density"/>
+										<CheckBox id="tap" text="Tap Density"/>
+										<CheckBox id="scott" text="Scott Density"/>
+										<layoutData>
+											<l:GridData span="XL1 L3 M2 S4"/>
+										</layoutData>
+									</VBox>
+									<VBox>
+										<layoutData>
+											<l:GridData span="XL1 L6 M2 S4"/>
+										</layoutData>
+									</VBox>
+									<HBox>
+										<CheckBox id="screen" text="Screen test"/>
+										<CheckBox id="brush" text="Brush"/>
+										<CheckBox id="rottaped" text="Rottaped"/>
+										<layoutData>
+											<l:GridData span="XL1 L12 M2 S4"/>
+										</layoutData>
+									</HBox>
+									<Label text="Mesh size(s)">
+										<layoutData>
+											<l:GridData span="XL1 L3 M2 S4"/>
+										</layoutData>
+									</Label>
+									<Input id="msize" value="something">
+										<layoutData>
+											<l:GridData span="XL1 L9 M2 S4"/>
+										</layoutData>
+									</Input>
+									<CheckBox id="sem" text="SEM magnification">
+										<layoutData>
+											<l:GridData span="XL1 L3 M2 S4"/>
+										</layoutData>
+									</CheckBox>
+									<Input id="semi" value="something">
+										<layoutData>
+											<l:GridData span="XL1 L3 M2 S4"/>
+										</layoutData>
+									</Input>
+									<CheckBox id="eds" text="EDS">
+										<layoutData>
+											<l:GridData span="XL1 L2 M2 S4"/>
+										</layoutData>
+									</CheckBox>
+									<CheckBox id="xraym" text="X-ray map">
+										<layoutData>
+											<l:GridData span="XL1 L2 M2 S4"/>
+										</layoutData>
+									</CheckBox>
+									<CheckBox id="xrayl" text="X-ray line">
+										<layoutData>
+											<l:GridData span="XL1 L2 M2 S4"/>
+										</layoutData>
+									</CheckBox>
+									<Label text="Material lab">
+										<layoutData>
+											<l:GridData span="XL1 L3 M2 S4"/>
+										</layoutData>
+									</Label>
+									<VBox>
+										<CheckBox id="awt" text="Abrasive Wear Test"/>
+										<CheckBox id="den" text="Density"/>
+										<CheckBox id="digm" text="Digital Micrograph"/>
+										<CheckBox id="hard" text="hardness"/>
+										<CheckBox id="hc" text="HC"/>
+										<layoutData>
+											<l:GridData span="XL1 L3 M2 S4"/>
+										</layoutData>
+									</VBox>
+									<VBox>
+										<CheckBox id="kic" text="KIC(Short rod)"/>
+										<CheckBox id="lsf" text="LSF"/>
+										<CheckBox id="ms" text="MS(%SAT)"/>
+										<CheckBox id="opt" text="Optical micrograph"/>
+										<CheckBox id="pc" text="Pressing Curve"/>
+										<layoutData>
+											<l:GridData span="XL1 L3 M2 S4"/>
+										</layoutData>
+									</VBox>
+									<VBox>
+										<CheckBox id="stest" text="Sintering test"/>
+										<CheckBox id="tga" text="TGA/DSC"/>
+										<CheckBox id="trs" text="TRS"/>
+										<CheckBox id="use" text="Use Test"/>
+										<CheckBox id="vsl" text="VSL"/>
+										<layoutData>
+											<l:GridData span="XL1 L3 M2 S4"/>
+										</layoutData>
+									</VBox>
+									<Label text="Chemical analysis">
+										<layoutData>
+											<l:GridData span="XL1 L3 M2 S4"/>
+										</layoutData>
+									</Label>
+									<VBox>
+										<CheckBox id="wty" text="W-typical"/>
+										<CheckBox id="wcty" text="WC-Typical"/>
+										<CheckBox id="pwd" text="Graded PWD"/>
+										<CheckBox id="apt" text="APT/BTO/YTO"/>
+										<CheckBox id="bl" text="BL/Scraping"/>
+										<layoutData>
+											<l:GridData span="XL1 L3 M2 S4"/>
+										</layoutData>
+									</VBox>
+									<VBox>
+										<CheckBox id="wall" text="W-All elements"/>
+										<CheckBox id="wcall" text="WC-All elements"/>
+										<CheckBox id="thermal" text="Thermal spray"/>
+										<CheckBox id="raw" text="Raw material"/>
+										<CheckBox id="mois" text="Moisture"/>
+										<layoutData>
+											<l:GridData span="XL1 L3 M2 S4"/>
+										</layoutData>
+									</VBox>
+									<VBox>
+										<CheckBox id="heavy" text="heavy Metal"/>
+										<CheckBox id="fs" text="FS"/>
+										<CheckBox id="spl" text="Special"/>
+										<CheckBox id="ore" text="ORE"/>
+										<layoutData>
+											<l:GridData span="XL1 L3 M2 S4"/>
+										</layoutData>
+									</VBox>
+									<Label text="Comments">
+										<layoutData>
+											<l:GridData span="XL1 L4 M2 S4"/>
+										</layoutData>
+									</Label>
+									<TextArea value="something" id="comment">
+										<layoutData>
+											<l:GridData span="XL1 L6 M2 S4"/>
+										</layoutData>
+									</TextArea>
+									<Button text="Download Doc" press="onDocPress">
+										<layoutData>
+											<l:GridData span="XL1 L2 M2 S4"/>
+										</layoutData>
+									</Button>
+								</f:content>
+							</f:SimpleForm>
+						</VBox>
+						<HBox renderType="Bare">
+							<mvc:XMLView id="availableProducts" viewName="BasicControls.BasicControls.view.AvailableProduct"/>
+							<VBox justifyContent="Center" class="sapUiTinyMarginBeginEnd">
+								<Button class="sapUiTinyMarginBottom" icon="sap-icon://navigation-right-arrow" tooltip="Move to selected"
+									press="moveToSelectedProductsTable"/>
+								<Button icon="sap-icon://navigation-left-arrow" tooltip="Move to available" press="moveToAvailableProductsTable"/>
+							</VBox>
+							<mvc:XMLView id="selectedProducts" viewName="BasicControls.BasicControls.view.SelectedProduct"/>
+						</HBox>
 					</VBox>
 				</content>
 			</Page>
