@@ -1,5 +1,6 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:ui="sap.ui.table" xmlns:f="sap.ui.layout.form"
-	xmlns:l="sap.ui.layout" controllerName="BasicControls.BasicControls.controller.SecondView" xmlns:html="http://www.w3.org/1999/xhtml">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:dnd="sap.ui.core.dnd" xmlns="sap.m"
+	xmlns:ui="sap.ui.table" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
+	controllerName="BasicControls.BasicControls.controller.SecondView" xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages>
 			<Page title="Title">
@@ -308,13 +309,92 @@
 							</f:SimpleForm>
 						</VBox>
 						<HBox renderType="Bare">
-							<mvc:XMLView id="availableProducts" viewName="BasicControls.BasicControls.view.AvailableProduct"/>
+							<Table id="atable" mode="SingleSelectMaster" growing="true" growingThreshold="10" beforeOpenContextMenu="onBeforeOpenContextMenu"
+								items="{ path: '/avproduct' }">
+								<contextMenu>
+									<Menu>
+										<MenuItem text="Move to Selected Products" press="moveToSelectedProductsTable"/>
+									</Menu>
+								</contextMenu>
+								<headerToolbar>
+									<OverflowToolbar>
+										<Title text="Available Products"/>
+									</OverflowToolbar>
+								</headerToolbar>
+								<columns>
+									<Column>
+										<Text text="Product Name"/>
+									</Column>
+									<Column>
+										<Text text="Category"/>
+									</Column>
+									<Column hAlign="End" width="6rem">
+										<Text text="Quantity"/>
+									</Column>
+								</columns>
+								<dragDropConfig>
+									<dnd:DragInfo groupName="available2selected" sourceAggregation="items"/>
+									<dnd:DropInfo groupName="selected2available" drop="onDropAvailableProductsTable"/>
+								</dragDropConfig>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<Text text="{productName}" wrapping="false"/>
+											<Text text="{category}" wrapping="false"/>
+											<Text text="{ path: 'quantity', type: 'sap.ui.model.type.Integer' }"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
 							<VBox justifyContent="Center" class="sapUiTinyMarginBeginEnd">
 								<Button class="sapUiTinyMarginBottom" icon="sap-icon://navigation-right-arrow" tooltip="Move to selected"
 									press="moveToSelectedProductsTable"/>
 								<Button icon="sap-icon://navigation-left-arrow" tooltip="Move to available" press="moveToAvailableProductsTable"/>
 							</VBox>
-							<mvc:XMLView id="selectedProducts" viewName="BasicControls.BasicControls.view.SelectedProduct"/>
+							<Table id="stable" mode="SingleSelectMaster" growing="true" growingThreshold="10" beforeOpenContextMenu="onBeforeOpenContextMenu"
+								items="{ path: '/seproduct' }"
+								noDataText="Please drag-and-drop products here.">
+								<contextMenu>
+									<Menu>
+										<MenuItem text="Move to Available Products" press="moveToAvailableProductsTable"/>
+										<MenuItem text="Move up" press="moveUp"/>
+										<MenuItem text="Move down" press="moveDown"/>
+									</Menu>
+								</contextMenu>
+								<headerToolbar>
+									<OverflowToolbar>
+										<Title text="Selected Products"/>
+										<ToolbarSpacer/>
+										<Button icon="sap-icon://navigation-up-arrow" tooltip="Move up" press="moveUp"/>
+										<Button icon="sap-icon://navigation-down-arrow" tooltip="Move down" press="moveDown"/>
+									</OverflowToolbar>
+								</headerToolbar>
+								<columns>
+									<Column>
+										<Text text="Product Name"/>
+									</Column>
+									<Column>
+										<Text text="Category"/>
+									</Column>
+									<Column hAlign="End" width="6rem">
+										<Text text="Quantity"/>
+									</Column>
+								</columns>
+								<dragDropConfig>
+									<dnd:DragInfo groupName="selected2available" sourceAggregation="items"/>
+									<dnd:DropInfo groupName="available2selected" targetAggregation="items" dropPosition="Between" drop="onDropSelectedProductsTable"/>
+									<dnd:DragDropInfo sourceAggregation="items" targetAggregation="items" dropPosition="Between" drop="onDropSelectedProductsTable"/>
+								</dragDropConfig>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<Text text="{productName}" wrapping="false"/>
+											<Text text="{category}" wrapping="false"/>
+											<Text text="{ path: 'quantity', type: 'sap.ui.model.type.Integer' }"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
 						</HBox>
 					</VBox>
 				</content>

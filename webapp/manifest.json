@@ -112,6 +112,18 @@
 				"SelectedProduct": {
 					"viewType": "XML",
 					"viewName": "SelectedProduct"
+				},
+				"AvaliableProduct": {
+					"viewType": "XML",
+					"viewName": "AvaliableProduct"
+				},
+				"AvailableProducts": {
+					"viewType": "XML",
+					"viewName": "AvailableProducts"
+				},
+				"SelectedProducts": {
+					"viewType": "XML",
+					"viewName": "SelectedProducts"
 				}
 			}
 		}
