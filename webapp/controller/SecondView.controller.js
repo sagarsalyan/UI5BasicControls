@@ -63,6 +63,7 @@ sap.ui.define([
 			}
 			var itemModel = new sap.ui.model.json.JSONModel(items)
 			this.getView().byId("atable").setModel(itemModel)
+			this.getView().byId("stable").setModel(itemModel)
 		},
 
 		_handleRouteMatched: function (oEvent) {
@@ -434,6 +435,12 @@ sap.ui.define([
 			if (!oDraggedItemContext) {
 				return;
 			}
+			var i = oDraggedItem.getBindingContextPath().split("/").slice(-1)[0]
+			var data = oDraggedItem.getBindingContext().getObject()
+			this.getView().byId("atable").getModel().getData().avproduct.splice(i,1)
+			this.getView().byId("stable").getModel().getData().seproduct.push(data)
+			this.getView().byId("atable").getModel().refresh(true)
+			this.getView().byId("stable").getModel().refresh(true)
 		}
 		/**
 		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
