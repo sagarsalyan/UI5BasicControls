@@ -64,65 +64,52 @@ sap.ui.define([
 			var itemModel = new sap.ui.model.json.JSONModel(items)
 			this.getView().byId("atable").setModel(itemModel)
 			this.getView().byId("stable").setModel(itemModel)
-			
+
 			//Dynamic Table Container
 			var tableData = {
-				name:"Product List",
-				count:5,
-				tables:[
-					{
-						tableName:"TV",
-						items:[
-							{
-								brand:"LG",
-								price:"45000"
-							},
-							{
-								brand:"MI",
-								price:"12000"
-							},
-							{
-								brand:"Samsung",
-								price:"71000"
-							}
-						]
-					},
-					{
-						tableName:"Phone",
-						items:[
-							{
-								brand:"Motorola",
-								price:"17000"
-							},
-							{
-								brand:"Samsung",
-								price:"75000"
-							},
-							{
-								brand:"One Plus",
-								price:"35000"
-							}
-						]
-					},
-					{
-						tableName:"Laptop",
-						items:[
-							{
-								brand:"DELL",
-								price:"45000"
-							},
-							{
-								brand:"HP",
-								price:"35000"
-							},
-							{
-								brand:"Samsung",
-								price:"55000"
-							}
-						]
-					}
-				]
+				tableData: {
+					name: "Product List",
+					count: 5,
+					tables: [{
+						tableName: "TV",
+						items: [{
+							brand: "LG",
+							price: "45000"
+						}, {
+							brand: "MI",
+							price: "12000"
+						}, {
+							brand: "Samsung",
+							price: "71000"
+						}]
+					}, {
+						tableName: "Phone",
+						items: [{
+							brand: "Motorola",
+							price: "17000"
+						}, {
+							brand: "Samsung",
+							price: "75000"
+						}, {
+							brand: "One Plus",
+							price: "35000"
+						}]
+					}, {
+						tableName: "Laptop",
+						items: [{
+							brand: "DELL",
+							price: "45000"
+						}, {
+							brand: "HP",
+							price: "35000"
+						}, {
+							brand: "Samsung",
+							price: "55000"
+						}]
+					}]
+				}
 			}
+
 			var tableDataModel = new sap.ui.model.json.JSONModel(tableData)
 			this.getView().byId("dynTabCont").setModel(tableDataModel)
 		},
@@ -486,7 +473,7 @@ sap.ui.define([
 			var oDraggedItem = oEvent.getParameter("draggedControl");
 			var dropTable = oEvent.getParameter("droppedControl");
 			var dragTable = oDraggedItem.getParent()
-			// var dropTable = oDroppedItem.getParent()
+				// var dropTable = oDroppedItem.getParent()
 
 			var oDraggedItemContext = oDraggedItem.getBindingContext();
 			if (!oDraggedItemContext) {
@@ -500,10 +487,32 @@ sap.ui.define([
 			dropTable.getModel().refresh(true)
 		},
 		onDropSelectedProductsTable: function (oEvent) {
+			var oDraggedItem = oEvent.getParameter("draggedControl");
+			var dropTable = oEvent.getParameter("droppedControl");
+			var dragTable = oDraggedItem.getParent()
+				// var dropTable = oDroppedItem.getParent()
+			var oDraggedItemContext = oDraggedItem.getBindingContext();
+			if (!oDraggedItemContext) {
+				return;
+			}
+			// if (oDroppedItem instanceof sap.m.ColumnListItem) {
+
+			// }
+			var i = oDraggedItem.getBindingContextPath().split("/").slice(-1)[0]
+			var data = oDraggedItem.getBindingContext().getObject()
+			dragTable.getModel().getData().avproduct.splice(i, 1)
+			dropTable.getModel().getData().seproduct.push(data)
+			dragTable.getModel().refresh(true)
+			dropTable.getModel().refresh(true)
+		},
+		onDropTable: function (oEvent) {
 				var oDraggedItem = oEvent.getParameter("draggedControl");
 				var dropTable = oEvent.getParameter("droppedControl");
 				var dragTable = oDraggedItem.getParent()
-				// var dropTable = oDroppedItem.getParent()
+					// var dropTable = oDroppedItem.getParent()
+				var dragTblIndex = dragTable.getBindingContext().getPath().split("/")[3]
+				var dropTblIndex = dropTable.getBindingContext().getPath().split("/")[3]
+				
 				var oDraggedItemContext = oDraggedItem.getBindingContext();
 				if (!oDraggedItemContext) {
 					return;
@@ -511,10 +520,11 @@ sap.ui.define([
 				// if (oDroppedItem instanceof sap.m.ColumnListItem) {
 
 				// }
-				var i = oDraggedItem.getBindingContextPath().split("/").slice(-1)[0]
 				var data = oDraggedItem.getBindingContext().getObject()
-				dragTable.getModel().getData().avproduct.splice(i, 1)
-				dropTable.getModel().getData().seproduct.push(data)
+				var i = oDraggedItem.getBindingContextPath().split("/").slice(-1)[0]
+				dragTable.getModel().getData().tableData.tables[dragTblIndex].items.splice(i, 1)
+				// dragTable.getModel().getData().avproduct.splice(i, 1)
+				dropTable.getModel().getData().tableData.tables[dropTblIndex].items.push(data)
 				dragTable.getModel().refresh(true)
 				dropTable.getModel().refresh(true)
 			}

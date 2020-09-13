@@ -395,7 +395,8 @@
 								</items>
 							</Table>
 						</HBox>
-						<HBox id="dynTabCont" items="{/tables}">
+						<HBox id="dynTabCont" binding="{/tableData}" items="{tables}">
+							
 							<items>
 								<Table headerText="{tableName}" items="{items}">
 									<columns>
@@ -406,6 +407,11 @@
 											<Text text="Price"/>
 										</Column>
 									</columns>
+									<dragDropConfig>
+										<dnd:DragInfo groupName="" sourceAggregation="items"/>
+										<dnd:DropInfo groupName="" targetAggregation="items" dropPosition="Between" drop="onDropTable"/>
+										<dnd:DragDropInfo sourceAggregation="items" targetAggregation="items" dropPosition="Between" drop="onDropTable"/>
+									</dragDropConfig>
 									<items>
 										<ColumnListItem>
 											<cells>
