@@ -383,7 +383,7 @@
 								<dragDropConfig>
 									<dnd:DragInfo groupName="selected2available" sourceAggregation="items"/>
 									<dnd:DropInfo groupName="available2selected" targetAggregation="items" dropPosition="Between" drop="onDropSelectedProductsTable"/>
-									<dnd:DragDropInfo sourceAggregation="items" targetAggregation="items" dropPosition="Between" drop="onDropSelectedProductsTable"/>
+									<!--<dnd:DragDropInfo sourceAggregation="items" targetAggregation="items" dropPosition="Between" drop="onDropSelectedProductsTable"/>-->
 								</dragDropConfig>
 								<items>
 									<ColumnListItem>

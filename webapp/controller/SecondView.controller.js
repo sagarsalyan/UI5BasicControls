@@ -4,7 +4,7 @@ sap.ui.define([
 	"sap/ui/core/util/ExportTypeCSV",
 	'sap/ui/export/Spreadsheet',
 	"sap/m/ColumnListItem"
-], function (Controller, Export, ExportTypeCSV, Spreadsheet,ColumnListItem) {
+], function (Controller, Export, ExportTypeCSV, Spreadsheet, ColumnListItem) {
 	"use strict";
 
 	return Controller.extend("BasicControls.BasicControls.controller.SecondView", {
@@ -34,32 +34,32 @@ sap.ui.define([
 			//Drag and drop table data
 			var items = {
 				avproduct: [{
-					rowId:1,
+					rowId: 1,
 					productName: "Notebook",
 					category: "Stationary",
 					quantity: "10"
 				}, {
-					rowId:2,
+					rowId: 2,
 					productName: "Pencil",
 					category: "Stationary",
 					quantity: "15"
 				}, {
-					rowId:3,
+					rowId: 3,
 					productName: "Laptop",
 					category: "Electronics",
 					quantity: "5"
 				}, {
-					rowId:4,
+					rowId: 4,
 					productName: "Mouse",
 					category: "Electronics",
 					quantity: "10"
 				}, {
-					rowId:5,
+					rowId: 5,
 					productName: "CPU",
 					category: "Electronics",
 					quantity: "1"
 				}],
-				seproduct:[]
+				seproduct: []
 			}
 			var itemModel = new sap.ui.model.json.JSONModel(items)
 			this.getView().byId("atable").setModel(itemModel)
@@ -421,35 +421,50 @@ sap.ui.define([
 			fileDownload.click();
 			document.body.removeChild(fileDownload);
 		},
-		onDropAvailableProductsTable: function(oEvent) {
+		onDropAvailableProductsTable: function (oEvent) {
 			var oDraggedItem = oEvent.getParameter("draggedControl");
-			var oDraggedItemContext = oDraggedItem.getBindingContext();
-			if (!oDraggedItemContext) {
-				return;
-			}
-			var oProductsModel = this.getView().byId("atable").getModel();
-		},
-		onDropSelectedProductsTable: function(oEvent) {
-			var oDraggedItem = oEvent.getParameter("draggedControl");
+			var dropTable = oEvent.getParameter("droppedControl");
+			var dragTable = oDraggedItem.getParent()
+			// var dropTable = oDroppedItem.getParent()
+
 			var oDraggedItemContext = oDraggedItem.getBindingContext();
 			if (!oDraggedItemContext) {
 				return;
 			}
 			var i = oDraggedItem.getBindingContextPath().split("/").slice(-1)[0]
 			var data = oDraggedItem.getBindingContext().getObject()
-			this.getView().byId("atable").getModel().getData().avproduct.splice(i,1)
-			this.getView().byId("stable").getModel().getData().seproduct.push(data)
-			this.getView().byId("atable").getModel().refresh(true)
-			this.getView().byId("stable").getModel().refresh(true)
-		}
-		/**
-		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
-		 * (NOT before the first rendering! onInit() is used for that one!).
-		 * @memberOf BasicControls.BasicControls.view.SecondView
-		 */
-		//	onBeforeRendering: function() {
-		//
-		//	},
+			dragTable.getModel().getData().seproduct.splice(i, 1)
+			dropTable.getModel().getData().avproduct.push(data)
+			dragTable.getModel().refresh(true)
+			dropTable.getModel().refresh(true)
+		},
+		onDropSelectedProductsTable: function (oEvent) {
+				var oDraggedItem = oEvent.getParameter("draggedControl");
+				var dropTable = oEvent.getParameter("droppedControl");
+				var dragTable = oDraggedItem.getParent()
+				// var dropTable = oDroppedItem.getParent()
+				var oDraggedItemContext = oDraggedItem.getBindingContext();
+				if (!oDraggedItemContext) {
+					return;
+				}
+				// if (oDroppedItem instanceof sap.m.ColumnListItem) {
+
+				// }
+				var i = oDraggedItem.getBindingContextPath().split("/").slice(-1)[0]
+				var data = oDraggedItem.getBindingContext().getObject()
+				dragTable.getModel().getData().avproduct.splice(i, 1)
+				dropTable.getModel().getData().seproduct.push(data)
+				dragTable.getModel().refresh(true)
+				dropTable.getModel().refresh(true)
+			}
+			/**
+			 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
+			 * (NOT before the first rendering! onInit() is used for that one!).
+			 * @memberOf BasicControls.BasicControls.view.SecondView
+			 */
+			//	onBeforeRendering: function() {
+			//
+			//	},
 
 		/**
 		 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
