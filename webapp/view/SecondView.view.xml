@@ -1,6 +1,6 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:dnd="sap.ui.core.dnd" xmlns="sap.m"
-	xmlns:ui="sap.ui.table" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
-	controllerName="BasicControls.BasicControls.controller.SecondView" xmlns:html="http://www.w3.org/1999/xhtml">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:dnd="sap.ui.core.dnd" xmlns="sap.m" xmlns:ui="sap.ui.table"
+	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" controllerName="BasicControls.BasicControls.controller.SecondView"
+	xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages>
 			<Page title="Title">
@@ -352,8 +352,7 @@
 								<Button icon="sap-icon://navigation-left-arrow" tooltip="Move to available" press="moveToAvailableProductsTable"/>
 							</VBox>
 							<Table id="stable" mode="SingleSelectMaster" growing="true" growingThreshold="10" beforeOpenContextMenu="onBeforeOpenContextMenu"
-								items="{ path: '/seproduct' }"
-								noDataText="Please drag-and-drop products here.">
+								items="{ path: '/seproduct' }" noDataText="Please drag-and-drop products here.">
 								<contextMenu>
 									<Menu>
 										<MenuItem text="Move to Available Products" press="moveToAvailableProductsTable"/>
@@ -383,7 +382,7 @@
 								<dragDropConfig>
 									<dnd:DragInfo groupName="selected2available" sourceAggregation="items"/>
 									<dnd:DropInfo groupName="available2selected" targetAggregation="items" dropPosition="Between" drop="onDropSelectedProductsTable"/>
-									<!--<dnd:DragDropInfo sourceAggregation="items" targetAggregation="items" dropPosition="Between" drop="onDropSelectedProductsTable"/>-->
+									<dnd:DragDropInfo sourceAggregation="items" targetAggregation="items" dropPosition="Between" drop="onDropSelectedProductsTable"/>
 								</dragDropConfig>
 								<items>
 									<ColumnListItem>
@@ -395,6 +394,28 @@
 									</ColumnListItem>
 								</items>
 							</Table>
+						</HBox>
+						<HBox id="dynTabCont" items="{/tables}">
+							<items>
+								<Table headerText="{tableName}" items="{items}">
+									<columns>
+										<Column>
+											<Text text=" Brand"/>
+										</Column>
+										<Column hAlign="End" width="6rem">
+											<Text text="Price"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem>
+											<cells>
+												<Text text="{brand}" wrapping="false"/>
+												<Text text="{ path: 'price', type: 'sap.ui.model.type.Integer' }"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</items>
 						</HBox>
 					</VBox>
 				</content>

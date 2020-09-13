@@ -64,6 +64,67 @@ sap.ui.define([
 			var itemModel = new sap.ui.model.json.JSONModel(items)
 			this.getView().byId("atable").setModel(itemModel)
 			this.getView().byId("stable").setModel(itemModel)
+			
+			//Dynamic Table Container
+			var tableData = {
+				name:"Product List",
+				count:5,
+				tables:[
+					{
+						tableName:"TV",
+						items:[
+							{
+								brand:"LG",
+								price:"45000"
+							},
+							{
+								brand:"MI",
+								price:"12000"
+							},
+							{
+								brand:"Samsung",
+								price:"71000"
+							}
+						]
+					},
+					{
+						tableName:"Phone",
+						items:[
+							{
+								brand:"Motorola",
+								price:"17000"
+							},
+							{
+								brand:"Samsung",
+								price:"75000"
+							},
+							{
+								brand:"One Plus",
+								price:"35000"
+							}
+						]
+					},
+					{
+						tableName:"Laptop",
+						items:[
+							{
+								brand:"DELL",
+								price:"45000"
+							},
+							{
+								brand:"HP",
+								price:"35000"
+							},
+							{
+								brand:"Samsung",
+								price:"55000"
+							}
+						]
+					}
+				]
+			}
+			var tableDataModel = new sap.ui.model.json.JSONModel(tableData)
+			this.getView().byId("dynTabCont").setModel(tableDataModel)
 		},
 
 		_handleRouteMatched: function (oEvent) {
