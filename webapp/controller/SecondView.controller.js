@@ -81,6 +81,13 @@ sap.ui.define([
 						}, {
 							brand: "Samsung",
 							price: "71000"
+						},{
+							brand: "Philips",
+							price: "72000"
+						},
+						{
+							brand: "Sony",
+							price: "92000"
 						}]
 					}, {
 						tableName: "Phone",
@@ -93,6 +100,12 @@ sap.ui.define([
 						}, {
 							brand: "One Plus",
 							price: "35000"
+						},{
+							brand: "Sony",
+							price: "35000"
+						},{
+							brand: "Lava",
+							price: "13000"
 						}]
 					}, {
 						tableName: "Laptop",
@@ -469,6 +482,11 @@ sap.ui.define([
 			fileDownload.click();
 			document.body.removeChild(fileDownload);
 		},
+		onDragAvaliableProductStart:function(oEvent){
+			var dragRow = oEvent.getParameter("target");
+			var dragSession = oEvent.getParameter("dragSession");
+			dragSession.setComplexData("draggedRowContext",dragRow.getBindingContext());
+		},
 		onDropAvailableProductsTable: function (oEvent) {
 			var oDraggedItem = oEvent.getParameter("draggedControl");
 			var dropTable = oEvent.getParameter("droppedControl");
@@ -505,9 +523,18 @@ sap.ui.define([
 			dragTable.getModel().refresh(true)
 			dropTable.getModel().refresh(true)
 		},
+		onDragStart:function(oEvent){
+			var dragRow = oEvent.getParameter("target");
+			var dragSession = oEvent.getParameter("dragSession");
+			dragSession.setComplexData("draggedRowContext",dragRow.getBindingContext());
+		},
 		onDropTable: function (oEvent) {
 				var oDraggedItem = oEvent.getParameter("draggedControl");
 				var dropTable = oEvent.getParameter("droppedControl");
+				var dragSession = oEvent.getParameter("dragSession");
+				var draggedRowContext = dragSession.getComplexData("draggedRowContext");
+				
+				
 				var dragTable = oDraggedItem.getParent()
 					// var dropTable = oDroppedItem.getParent()
 				var dragTblIndex = dragTable.getBindingContext().getPath().split("/")[3]

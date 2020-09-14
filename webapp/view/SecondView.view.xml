@@ -333,7 +333,7 @@
 									</Column>
 								</columns>
 								<dragDropConfig>
-									<dnd:DragInfo groupName="available2selected" sourceAggregation="items"/>
+									<dnd:DragInfo groupName="available2selected" dragStart="onDragAvaliableProductStart" sourceAggregation="items"/>
 									<dnd:DropInfo groupName="selected2available" drop="onDropAvailableProductsTable"/>
 								</dragDropConfig>
 								<items>
@@ -381,8 +381,8 @@
 								</columns>
 								<dragDropConfig>
 									<dnd:DragInfo groupName="selected2available" sourceAggregation="items"/>
-									<dnd:DropInfo groupName="available2selected" targetAggregation="items" dropPosition="Between" drop="onDropSelectedProductsTable"/>
-									<dnd:DragDropInfo sourceAggregation="items" targetAggregation="items" dropPosition="Between" drop="onDropSelectedProductsTable"/>
+									<dnd:DropInfo groupName="available2selected" targetAggregation="items" dropPosition="Between"  drop="onDropSelectedProductsTable"/>
+									<dnd:DragDropInfo sourceAggregation="items" targetAggregation="items" dropPosition="Between" dragStart="onDragAvaliableProductStart" drop="onDropSelectedProductsTable"/>
 								</dragDropConfig>
 								<items>
 									<ColumnListItem>
@@ -396,7 +396,6 @@
 							</Table>
 						</HBox>
 						<HBox id="dynTabCont" binding="{/tableData}" items="{tables}">
-							
 							<items>
 								<Table headerText="{tableName}" items="{items}">
 									<columns>
@@ -408,9 +407,9 @@
 										</Column>
 									</columns>
 									<dragDropConfig>
-										<dnd:DragInfo groupName="" sourceAggregation="items"/>
+										<dnd:DragInfo groupName="" sourceAggregation="items" dragStart="onDragStart"/>
 										<dnd:DropInfo groupName="" targetAggregation="items" dropPosition="Between" drop="onDropTable"/>
-										<dnd:DragDropInfo sourceAggregation="items" targetAggregation="items" dropPosition="Between" drop="onDropTable"/>
+										<dnd:DragDropInfo sourceAggregation="items" targetAggregation="items" dragStart="onDragStart" dropPosition="Between" drop="onDropTable"/>
 									</dragDropConfig>
 									<items>
 										<ColumnListItem>
