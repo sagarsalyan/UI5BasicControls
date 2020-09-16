@@ -557,21 +557,30 @@ sap.ui.define([
 					var oTabResult = oTabModel.getData().tableData.tables
 
 					if (dragTab === droppedTab) {
-						var iNewRowIndex = droppedLine;
+						   
 						var newRowContext = oTabResult[dragTab].items[dragLine];
 						oTabResult[droppedTab].items.splice(droppedLine, 0, newRowContext)
 						oTabResult[dragTab].items.splice(dragLine, 1)
 					}
 					if (dragTab !== droppedTab) {
-						var iNewRowIndex = droppedLine;
+						if(oEvent.getParameter("dropPosition") == "After")
+							var iNewRowIndex = droppedLine+1;
+						else
+							var iNewRowIndex = droppedLine;   
 						var newRowContext = oTabResult[dragTab].items[dragLine];
-						oTabResult[droppedTab].items.splice(droppedLine, 0, newRowContext)
+						oTabResult[droppedTab].items.splice(iNewRowIndex, 0, newRowContext)
 						oTabResult[dragTab].items.splice(dragLine, 1)
 
 					}
-					oEvent.getParameter("droppedControl").getParent().getModel().refresh(true)
-
 				}
+				else{
+					var oTabResult = oEvent.getParameter("droppedControl").getModel().getData().tableData.tables;
+					var droppedTab = oEvent.getParameter("droppedControl").getId().split("-")[4];
+					var newRowContext = oTabResult[dragTab].items[dragLine];
+					oTabResult[droppedTab].items.push(newRowContext);
+					oTabResult[dragTab].items.splice(dragLine, 1)
+				}
+				oEvent.getParameter("droppedControl").getParent().getModel().refresh(true)
 
 				// var oDraggedItem = oEvent.getParameter("draggedControl");
 				// var dropTable = oEvent.getParameter("droppedControl");
