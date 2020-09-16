@@ -380,9 +380,9 @@
 									</Column>
 								</columns>
 								<dragDropConfig>
-									<dnd:DragInfo groupName="selected2available" sourceAggregation="items"/>
+									<dnd:DragInfo groupName="selected2available" sourceAggregation="items" dragStart="onDragSelectedProductStart"/>
 									<dnd:DropInfo groupName="available2selected" targetAggregation="items" dropPosition="Between"  drop="onDropSelectedProductsTable"/>
-									<dnd:DragDropInfo sourceAggregation="items" targetAggregation="items" dropPosition="Between" dragStart="onDragAvaliableProductStart" drop="onDropSelectedProductsTable"/>
+									<dnd:DragDropInfo sourceAggregation="items" targetAggregation="items" dropPosition="Between" dragStart="onDragSelectedProductStart" drop="onDropSelectedProductsTable"/>
 								</dragDropConfig>
 								<items>
 									<ColumnListItem>
