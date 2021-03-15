@@ -1,4 +1,4 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:dnd="sap.ui.core.dnd" xmlns="sap.m" xmlns:ui="sap.ui.table"
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:dnd="sap.ui.core.dnd" xmlns="sap.m" xmlns:ui="sap.ui.table" xmlns:u="sap.ui.unified"
 	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" controllerName="BasicControls.BasicControls.controller.SecondView"
 	xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
@@ -10,6 +10,8 @@
 						<HBox>
 							<Button text="DownloadCSV" press="onDownloadCSV"/>
 							<Button text="DownloadSpreedSheet" press="onDownloadSS"/>
+							<u:FileUploader id="FileUploaderId" sameFilenameAllowed="true" iconOnly="false" buttonOnly="true" fileType="XLSX,xlsx"
+									icon="sap-icon://upload" iconFirst="true" style="Emphasized" change="onUpload"/>
 						</HBox>
 						<Table id="idResultsTablem" selectionChange="onSelectionChange" mode="MultiSelect" sticky="HeaderToolbar,ColumnHeaders"></Table>
 						<HBox>

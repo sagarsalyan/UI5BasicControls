@@ -403,6 +403,36 @@ sap.ui.define([
 					oSheet.destroy();
 				});
 		},
+		onUpload: function (e) {
+			this._import(e.getParameter("files") && e.getParameter("files")[0]);
+		},
+		_import: function (file) {
+			var that = this;
+			var excelData = {};
+			if (file && window.FileReader) {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					var data = e.target.result;
+					var workbook = XLSX.read(data, {
+						type: 'binary'
+					});
+					workbook.SheetNames.forEach(function (sheetName) {
+						// Here is your object for every sheet in workbook
+						excelData = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+
+					});
+					// Setting the data to the local model 
+					this.getView().byId("idResultsTablem").getModel().setData({
+						items: excelData
+					});
+					this.getView().byId("idResultsTablem").getModel().refresh(true);
+				}.bind(this);
+				reader.onerror = function (ex) {
+					console.log(ex);
+				};
+				reader.readAsBinaryString(file);
+			}
+		},
 		onSend: function (oEvent) {
 			debugger
 			var selectedData = this.getView().byId("idResultsTablem").getSelectedItems().map(data => data.getBindingContext().getObject());
@@ -557,23 +587,22 @@ sap.ui.define([
 					var oTabResult = oTabModel.getData().tableData.tables
 
 					if (dragTab === droppedTab) {
-						   
+
 						var newRowContext = oTabResult[dragTab].items[dragLine];
 						oTabResult[droppedTab].items.splice(droppedLine, 0, newRowContext)
 						oTabResult[dragTab].items.splice(dragLine, 1)
 					}
 					if (dragTab !== droppedTab) {
-						if(oEvent.getParameter("dropPosition") == "After")
-							var iNewRowIndex = droppedLine+1;
+						if (oEvent.getParameter("dropPosition") == "After")
+							var iNewRowIndex = droppedLine + 1;
 						else
-							var iNewRowIndex = droppedLine;   
+							var iNewRowIndex = droppedLine;
 						var newRowContext = oTabResult[dragTab].items[dragLine];
 						oTabResult[droppedTab].items.splice(iNewRowIndex, 0, newRowContext)
 						oTabResult[dragTab].items.splice(dragLine, 1)
 
 					}
-				}
-				else{
+				} else {
 					var oTabResult = oEvent.getParameter("droppedControl").getModel().getData().tableData.tables;
 					var droppedTab = oEvent.getParameter("droppedControl").getId().split("-")[4];
 					var newRowContext = oTabResult[dragTab].items[dragLine];
