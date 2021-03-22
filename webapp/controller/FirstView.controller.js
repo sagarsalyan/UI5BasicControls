@@ -2,8 +2,9 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/core/EventBus",
 	"sap/ui/core/Fragment",
+	"sap/m/MessageToast",
 	"BasicControls/BasicControls/js/demo"
-], function (Controller, EventBus,Fragment) {
+], function (Controller, EventBus,Fragment,MessageToast) {
 	"use strict";
 
 	return Controller.extend("BasicControls.BasicControls.controller.FirstView", {
@@ -128,6 +129,29 @@ sap.ui.define([
 		onSecond: function () {
 			var route = new sap.ui.core.UIComponent.getRouterFor(this);
 			route.navTo("Second", true);
+		},
+		onRowSelect:function(oEvent){
+			MessageToast.show(oEvent.getSource().getParent().getBindingContext("JSON").getObject().name)
+		},
+		onBindAgain:function(oEvent){
+			debugger
+			var students=[{
+				"sid":"1",
+				"name":"Sagar",
+				"class":"MCA",
+				"address":"Perla",
+				"mobile":"8129482811"
+				},
+				{
+				"sid":"2",
+				"name":"Rakshi",
+				"class":"MCA",
+				"address":"Mudipu",
+				"mobile":"9964634224"
+				}
+			]
+			this.getView().getModel("JSON").setProperty("/students",students)
+			this.getView().getModel("JSON").refresh();
 		},
 		onAfterRendering: function () {
 			var inp = this.getView().byId("name");

@@ -12,11 +12,18 @@
 				"mobile":"8129482811"
 				},
 				{
-				"sid":"7",
-				"name":"Sagar",
+				"sid":"4",
+				"name":"Praveen",
 				"class":"MCA",
-				"address":"Kasaragod",
-				"mobile":"8129482811"
+				"address":"Mysore",
+				"mobile":"9282726252"
+				},
+				{
+				"sid":"7",
+				"name":"Rakshi",
+				"class":"MCA",
+				"address":"Mudipu",
+				"mobile":"9964634224"
 				},
 				{
 				"sid":"2",
