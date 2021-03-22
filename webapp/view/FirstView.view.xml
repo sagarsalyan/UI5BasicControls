@@ -60,7 +60,7 @@
 						</f:SimpleForm>
 						<t:Table rows="{JSON>/students}" title="Products" selectionMode="MultiToggle" visibleRowCount="4" paste="onPaste">
 							<t:columns>
-								<t:Column width="11rem">
+								<t:Column>
 									<Label text=""/>
 									<t:template>
 										<RadioButton select="onRowSelect" selected="{JSON>checked}"/>
