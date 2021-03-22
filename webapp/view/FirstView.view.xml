@@ -63,7 +63,13 @@
 								<t:Column width="11rem">
 									<Label text=""/>
 									<t:template>
-										<RadioButton select="onRowSelect"/>
+										<RadioButton select="onRowSelect" selected="{JSON>checked}"/>
+									</t:template>
+								</t:Column>
+								<t:Column width="11rem">
+									<Label text=""/>
+									<t:template>
+										<Input value="{JSON>inputData}"/>
 									</t:template>
 								</t:Column>
 								<t:Column width="11rem">
