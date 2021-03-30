@@ -4,9 +4,10 @@ sap.ui.define([
 	"sap/ui/core/util/ExportTypeCSV",
 	'sap/ui/export/Spreadsheet',
 	"sap/m/ColumnListItem",
+	"BasicControls/BasicControls/utils/jszip",
 	"BasicControls/BasicControls/utils/xlsx",
-	"BasicControls/BasicControls/utils/jszip"
-], function (Controller, Export, ExportTypeCSV, Spreadsheet, ColumnListItem,xlsx,jszip) {
+	
+], function (Controller, Export, ExportTypeCSV, Spreadsheet, ColumnListItem,jszip,xlsx) {
 	"use strict";
 
 	return Controller.extend("BasicControls.BasicControls.controller.SecondView", {
