@@ -3,13 +3,14 @@ sap.ui.define([
 	"sap/ui/core/util/Export",
 	"sap/ui/core/util/ExportTypeCSV",
 	'sap/ui/export/Spreadsheet',
+	'sap/ui/export/library',
 	"sap/m/ColumnListItem",
 	"BasicControls/BasicControls/utils/jszip",
 	"BasicControls/BasicControls/utils/xlsx",
 	
-], function (Controller, Export, ExportTypeCSV, Spreadsheet, ColumnListItem,jszip,xlsx) {
+], function (Controller, Export, ExportTypeCSV, Spreadsheet,exportLibrary, ColumnListItem,jszip,xlsx) {
 	"use strict";
-
+		var EdmType = exportLibrary.EdmType;
 	return Controller.extend("BasicControls.BasicControls.controller.SecondView", {
 
 		/**
@@ -196,7 +197,9 @@ sap.ui.define([
 				var coltemplate = oContext.getObject().coltemplate;
 				return new sap.ui.table.Column({
 					label: columnName,
-					template: coltemplate
+					template: new sap.m.Input({
+						value:"{"+coltemplate+"}"
+					})
 				});
 			});
 			oTable.bindRows("/rows");
@@ -388,7 +391,9 @@ sap.ui.define([
 			aCols.push({
 				label: 'DOB',
 				property: 'dob',
-				type: 'date'
+				type:  EdmType.Date,
+				format: 'dd-mm-yyyy h:mm:ss AM/PM',
+				width: 25
 			});
 			var oModel = this.getView().byId("idResultsTablem").getModel();
 			oSettings = {
