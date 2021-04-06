@@ -158,6 +158,7 @@
 					<footer>
 						<OverflowToolbar>
 							<ToolbarSpacer/>
+							<Button id="idChat" text="Chat with me" press="onChat"/>
 							<Button text="Second" press="onSecond"/>
 						</OverflowToolbar>
 					</footer>
