@@ -1,6 +1,6 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:dnd="sap.ui.core.dnd" xmlns="sap.m" xmlns:ui="sap.ui.table" xmlns:u="sap.ui.unified"
 	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" controllerName="BasicControls.BasicControls.controller.SecondView"
-	xmlns:html="http://www.w3.org/1999/xhtml">
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:cust="BasicControls.BasicControls.controls" >
 	<App>
 		<pages>
 			<Page title="Title">
@@ -425,6 +425,7 @@
 							</items>
 						</HBox>
 					</VBox>
+					<cust:Button text="Testtt"/>
 				</content>
 			</Page>
 		</pages>

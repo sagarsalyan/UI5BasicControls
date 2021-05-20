@@ -164,6 +164,7 @@
 								<commons:ProcessFlowLaneHeader laneId="{id}" iconSrc="{icon}" text="{label}" position="{position}"/>
 							</commons:lanes>
 						</commons:ProcessFlow>
+						<DateRangeSelection id="idDateRange" />
 					</content>
 					<footer>
 						<OverflowToolbar>

@@ -16,6 +16,10 @@ sap.ui.define([
 
 			//Menu
 			debugger;
+
+			this.getView().byId("idDateRange").setDateValue(new Date());
+			this.getView().byId("idDateRange").setSecondDateValue(new Date());
+
 			this.getView().byId("openMenu").attachBrowserEvent("tab keyup", function (oEvent) {
 				this._bKeyboard = oEvent.type == "keyup";
 			}, this);
@@ -47,12 +51,12 @@ sap.ui.define([
 
 			//ProcessFlowData
 			var processData = {
-				"nodes":[{
+				"nodes": [{
 					"id": "1",
 					"lane": "0",
 					"title": "Sales Order 1",
 					"titleAbbreviation": "SO 1",
-					"children": [10, 11, 12],
+					"children": [10, 11],
 					"state": "Positive",
 					"stateText": "OK status",
 					"focused": true,
@@ -329,21 +333,47 @@ sap.ui.define([
 		},
 		//SAP Conversational AI
 		getBot: function () {
+			debugger;
 			var that = this;
 			//check your user-slug in SAP Conversational AI 
+
+			var oAuthURL = "https://sapcai-community.authentication.eu10.hana.ondemand.com/oauth/token";
+
+			var oAuthPayload = {
+				"client_id": "sb-1206e778-1a15-4ade-8ff4-9eae26ebed98-CLONE-DT!b40741|cai-production!b20881",
+				"client_secret": "2Gyz12wNhHVTyI3Em4klAjjpNWs=",
+				"grant_type": "client_credentials"
+			}
+
+			var oAuthHeaders = {
+				"Content-Type": "application/x-www-form-urlencoded"
+			}
 			$.ajax({
-				type: "GET",
-				url: "https://" + "api.cai.tools.sap/auth/v1/owners/sagarslyn",
-				headers: {
-					"Authorization": "0778aa4ce06953cd01fa4cc2a0eb70fa" //request token
-				},
+				type: "POST",
+				url: oAuthURL,
+				headers: oAuthHeaders,
+				data: oAuthPayload,
 				success: function (data) {
-					that.uuid = data.results.owner.id;
+					that.oAuthToken = data['access_token'];
 				},
 				error: function (data) {
 					debugger
 				}
 			});
+
+			// $.ajax({
+			// 	type: "GET",
+			// 	url: "https://" + "api.cai.tools.sap/auth/v1/owners/sagarslyn",
+			// 	headers: {
+			// 		"Authorization": "Token 0778aa4ce06953cd01fa4cc2a0eb70fa" //request token
+			// 	},
+			// 	success: function (data) {
+			// 		that.uuid = data.results.owner.id;
+			// 	},
+			// 	error: function (data) {
+			// 		debugger
+			// 	}
+			// });
 
 		},
 		onChat: function (oEvent) {
@@ -364,60 +394,62 @@ sap.ui.define([
 			// sap.m.MessageToast.show("Hello");
 			// Value / Text entered by User
 			if (vInWrittenVal) {
-				that.fnAddContentToChatWindowFromPost(vInWrittenVal);
+				that.fnAddContentToChatWindowFromPost(vInWrittenVal,"self");
 				that.fnChatInputPost(vInWrittenVal); //----- Calling Written Input Post method to get response ----- //
 			}
 		},
 		liveChangeWriteReply: function (oEvent) {
 
 		},
-		fnAddContentToChatWindowFromPost: function (vTextVal) {
+		fnAddContentToChatWindowFromPost: function (vTextVal,msgType) {
 			var that = this;
 			var View = that.getView();
+			var justifyContent = msgType === "self" ? "End" : "Start";
 			// var vPathImage = jQuery.sap.getModulePath("mahi.Ven.MM");
 			// var oImageBot = vPathImage + '/Image/Bot.jpg';
-			var VBox = sap.ui.getCore().byId("id_VBChatWindow");
+			var oVBox = sap.ui.getCore().byId("id_VBChatWindow");
 			var oFBoxBotIP = new sap.m.FlexBox({
-				justifyContent: "Start"
-			}).addStyleClass("cl_ChatFelxBox");
+				justifyContent: justifyContent
+			});
 			// var oImg = new sap.m.Image({
 			// 	src: oImageBot
 			// }).addStyleClass("cl_ImgBot");
 			// OFBoxBotIP.addItem(oImg);
 			var oBotText = new sap.m.Text({
 				text: vTextVal
-			}).addStyleClass("cl_BotIPTextCir");
+			}).addStyleClass("cssChatMessage");
 			oFBoxBotIP.addItem(oBotText);
-			// oVBox.addItem(OFBoxBotIP);
+			oVBox.addItem(oFBoxBotIP);
 		},
 		fnChatInputPost: function (vInWrittenVal) {
 			var that = this;
+			var oURL = "https://api.cai.tools.sap/build/v1/dialog";
 			var oData = {
 				"message": {
 					"type": "text",
 					"content": vInWrittenVal //--- Message wrote by User ---//
 				},
-				"conversation_id": "test-189713489629", //--- Can pass any value --- //
+				"conversation_id": "test", //--- Can pass any value --- //
 				"log_level": "info"
 			};
+			var botToken = "5c0b471ef90ce613a76deb780aa108d1";
+			var oheaders = {
+				"Authorization": "Bearer " + this.oAuthToken,
+				"X-Token": "Token " + botToken,
+				"Content-Type": "application/json"
+			}
 			$.ajax({
 				type: 'POST',
 				data: JSON.stringify(oData),
-				url: "https://" + "api.cai.tools.sap/build/v1/dialog", //--- Callback URL for getting response from created Bot --- //
-				contentType: "application/json",
-				path: "/build/v1/dialog",
-				scheme: "https",
-				headers: {
-					"Authorization": "Token 6809c583a15e48ef59d511d35a95b8e7", //--- Generated Authorization token --- //
-					"x-uuid": that.uuid
-				},
-				success: function (oData, oResponse) {
-					if (oData.results) {
-						that.vBotResText = oData.results.messages[0].content; //--- Bot response --- //
+				url: oURL,
+				headers: oheaders,
+				success: function (odata, oResponse) {
+					if (odata.results) {
+						that.vBotResText = odata.results.messages[0].content; //--- Bot response --- //
 					} else {
 						that.vBotResText = 'Sorry, we can not help you right now, please connect to us after sometime';
 					}
-					that.fnAddContentToChatWindowFromPost(that.vBotResText); //--- Calling method for setting value to Chat Bot Window --- //
+					that.fnAddContentToChatWindowFromPost(that.vBotResText,"bot"); //--- Calling method for setting value to Chat Bot Window --- //
 					//$("div").scrollTop(6000);
 				},
 				error: function (Response) {

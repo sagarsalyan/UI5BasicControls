@@ -13,7 +13,7 @@
 			</Bar>
 		</customHeader>
 		<content><HBox></HBox>
-		<VBox focusable="true" id="id_VBChatWindow"></VBox>
+		<VBox id="id_VBChatWindow"></VBox>
 	</content>
 	<beginButton>
 		<HBox>
