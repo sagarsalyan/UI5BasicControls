@@ -404,17 +404,20 @@ sap.ui.define([
 		fnAddContentToChatWindowFromPost: function (vTextVal,msgType) {
 			var that = this;
 			var View = that.getView();
-			var justifyContent = msgType === "self" ? "End" : "Start";
-			// var vPathImage = jQuery.sap.getModulePath("mahi.Ven.MM");
-			// var oImageBot = vPathImage + '/Image/Bot.jpg';
+			// var justifyContent = msgType === "self" ? "End" : "Start";
+			var direction = msgType === "self" ? "RowReverse" : "Row";
+			
 			var oVBox = sap.ui.getCore().byId("id_VBChatWindow");
 			var oFBoxBotIP = new sap.m.FlexBox({
-				justifyContent: justifyContent
+				direction:direction,
+				justifyContent: "Start"
 			});
-			// var oImg = new sap.m.Image({
-			// 	src: oImageBot
-			// }).addStyleClass("cl_ImgBot");
-			// OFBoxBotIP.addItem(oImg);
+			var icon = "sap-icon://customer"
+			var oIcon = new sap.ui.core.Icon({
+				src: icon
+			});
+			oFBoxBotIP.addItem(oIcon);
+			
 			var oBotText = new sap.m.Text({
 				text: vTextVal
 			}).addStyleClass("cssChatMessage");
