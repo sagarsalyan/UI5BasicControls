@@ -157,14 +157,19 @@
 						</VBox>
 						<commons:ProcessFlow id="processflow1" scrollable="false" foldedCorners="true" nodePress="onNodePress" nodes="{/nodes}" lanes="{/lanes}">
 							<commons:nodes>
-								<commons:ProcessFlowNode laneId="{lane}" nodeId="{id}" title="{title}" titleAbbreviation="{titleAbbreviation}" children="{children}" state="{state}"
-									stateText="{stateText}" texts="{texts}" highlighted="{highlighted}" focused="{focused}"/>
+								<commons:ProcessFlowNode laneId="{lane}" nodeId="{id}" title="{title}" titleAbbreviation="{titleAbbreviation}" children="{children}"
+									state="{state}" stateText="{stateText}" texts="{texts}" highlighted="{highlighted}" focused="{focused}"/>
 							</commons:nodes>
 							<commons:lanes>
 								<commons:ProcessFlowLaneHeader laneId="{id}" iconSrc="{icon}" text="{label}" position="{position}"/>
 							</commons:lanes>
 						</commons:ProcessFlow>
-						<DateRangeSelection id="idDateRange" />
+						<DateRangeSelection id="idDateRange"/>
+						<List id="ShortProductList" headerText="Products" items="{ path: '/', sorter: { path: 'Type',group:'.getType' },groupHeaderFactory: '.getGroupHeader'}" >
+							<items>
+								<StandardListItem title="{Name}"/>
+							</items>
+						</List>
 					</content>
 					<footer>
 						<OverflowToolbar>

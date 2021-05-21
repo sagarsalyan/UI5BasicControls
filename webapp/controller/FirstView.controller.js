@@ -3,8 +3,9 @@ sap.ui.define([
 	"sap/ui/core/EventBus",
 	"sap/ui/core/Fragment",
 	"sap/m/MessageToast",
+	"sap/m/GroupHeaderListItem",
 	"BasicControls/BasicControls/js/demo"
-], function (Controller, EventBus, Fragment, MessageToast) {
+], function (Controller, EventBus, Fragment, MessageToast,GroupHeaderListItem) {
 	"use strict";
 
 	return Controller.extend("BasicControls.BasicControls.controller.FirstView", {
@@ -224,6 +225,31 @@ sap.ui.define([
 			var processModel = new sap.ui.model.json.JSONModel(processData)
 			this.getView().byId("processflow1").setModel(processModel)
 				//ProcessFlowData
+				
+				
+				//Grouping list
+				var productList = [{
+					Name:"TV",
+					Type:"EL"
+				},{
+					Name:"Radio",
+					Type:"EL"
+				},{
+					Name:"AC",
+					Type:"EL"
+				},{
+					Name:"Rice",
+					Type:"PA"
+				},{
+					Name:"Wheat",
+					Type:"PA"
+				},{
+					Name:"Bajra",
+					Type:"PA"
+				}];
+				var productListModel = new sap.ui.model.json.JSONModel(productList)
+			this.getView().byId("ShortProductList").setModel(productListModel)
+				//Grouping list
 		},
 		onButtonPress: function (oEvent) {
 			debugger;
@@ -461,6 +487,16 @@ sap.ui.define([
 			});
 		},
 		//SAP Conversational AI
+		getType:function(oEvent){
+			return oEvent.getProperty('Type');
+		},
+		getGroupHeader:function(oEvent){
+			if(oEvent.key === "EL") var text = "Electronics";
+			else if(oEvent.key === "PA") text = "Paddy";
+			return new GroupHeaderListItem({
+				title : text
+			})
+		},
 		onAfterRendering: function () {
 			var inp = this.getView().byId("name");
 			// inp.onkeypress = function(){
