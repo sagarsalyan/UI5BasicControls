@@ -1,6 +1,7 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:dnd="sap.ui.core.dnd" xmlns="sap.m" xmlns:ui="sap.ui.table" xmlns:u="sap.ui.unified"
-	xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" controllerName="BasicControls.BasicControls.controller.SecondView"
-	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:cust="BasicControls.BasicControls.controls" >
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:dnd="sap.ui.core.dnd" xmlns="sap.m" xmlns:ui="sap.ui.table"
+	xmlns:u="sap.ui.unified" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
+	controllerName="BasicControls.BasicControls.controller.SecondView" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:cust="BasicControls.BasicControls.controls">
 	<App>
 		<pages>
 			<Page title="Title">
@@ -11,7 +12,7 @@
 							<Button text="DownloadCSV" press="onDownloadCSV"/>
 							<Button text="DownloadSpreedSheet" press="onDownloadSS"/>
 							<u:FileUploader id="FileUploaderId" sameFilenameAllowed="true" iconOnly="false" buttonOnly="true" fileType="XLSX,xlsx"
-									icon="sap-icon://upload" iconFirst="true" style="Emphasized" change="onUpload"/>
+								icon="sap-icon://upload" iconFirst="true" style="Emphasized" change="onUpload"/>
 						</HBox>
 						<Table id="idResultsTablem" selectionChange="onSelectionChange" mode="MultiSelect" sticky="HeaderToolbar,ColumnHeaders"></Table>
 						<HBox>
@@ -383,8 +384,9 @@
 								</columns>
 								<dragDropConfig>
 									<dnd:DragInfo groupName="selected2available" sourceAggregation="items" dragStart="onDragSelectedProductStart"/>
-									<dnd:DropInfo groupName="available2selected" targetAggregation="items" dropPosition="Between"  drop="onDropSelectedProductsTable"/>
-									<dnd:DragDropInfo sourceAggregation="items" targetAggregation="items" dropPosition="Between" dragStart="onDragSelectedProductStart" drop="onDropSelectedProductsTable"/>
+									<dnd:DropInfo groupName="available2selected" targetAggregation="items" dropPosition="Between" drop="onDropSelectedProductsTable"/>
+									<dnd:DragDropInfo sourceAggregation="items" targetAggregation="items" dropPosition="Between" dragStart="onDragSelectedProductStart"
+										drop="onDropSelectedProductsTable"/>
 								</dragDropConfig>
 								<items>
 									<ColumnListItem>
@@ -425,6 +427,21 @@
 							</items>
 						</HBox>
 					</VBox>
+					<HBox>
+						<Table visible="true" id="ID_DEMO" items="{ path:'demoModel>/results',factory:'.myFactory'}">
+							<columns>
+								<Column minScreenWidth="Tablet" demandPopin="true">
+									<Text text="Name"/>
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true">
+									<Text text="City"/>
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true">
+									<Text text="Amount"/>
+								</Column>
+							</columns>
+						</Table>
+					</HBox>
 					<cust:Button text="Testtt"/>
 				</content>
 			</Page>

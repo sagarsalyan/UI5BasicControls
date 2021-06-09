@@ -7,10 +7,10 @@ sap.ui.define([
 	"sap/m/ColumnListItem",
 	"BasicControls/BasicControls/utils/jszip",
 	"BasicControls/BasicControls/utils/xlsx",
-	
-], function (Controller, Export, ExportTypeCSV, Spreadsheet,exportLibrary, ColumnListItem,jszip,xlsx) {
+
+], function (Controller, Export, ExportTypeCSV, Spreadsheet, exportLibrary, ColumnListItem, jszip, xlsx) {
 	"use strict";
-		var EdmType = exportLibrary.EdmType;
+	var EdmType = exportLibrary.EdmType;
 	return Controller.extend("BasicControls.BasicControls.controller.SecondView", {
 
 		/**
@@ -126,8 +126,32 @@ sap.ui.define([
 				}
 			}
 
-			var tableDataModel = new sap.ui.model.json.JSONModel(tableData)
-			this.getView().byId("dynTabCont").setModel(tableDataModel)
+			var tableDataModel = new sap.ui.model.json.JSONModel(tableData);
+			this.getView().byId("dynTabCont").setModel(tableDataModel);
+
+			//FactoryMethod
+			var arr = [{
+				"Name": "a",
+				"City": "w",
+				"Amount": 10,
+			}, {
+				"Name": "b",
+				"City": "x",
+				"Amount": 2,
+			}, {
+				"Name": "c",
+				"City": "y",
+				"Amount": 0,
+			}, {
+				"Name": "d",
+				"City": "z",
+				"Amount": 0,
+			}, ];
+			var demoModel = new sap.ui.model.json.JSONModel({
+				"results": arr
+			});
+			this.getView().byId("ID_DEMO").setModel(demoModel, "demoModel");
+			//FactoryMethod
 		},
 
 		_handleRouteMatched: function (oEvent) {
@@ -198,7 +222,7 @@ sap.ui.define([
 				return new sap.ui.table.Column({
 					label: columnName,
 					template: new sap.m.Input({
-						value:"{"+coltemplate+"}"
+						value: "{" + coltemplate + "}"
 					})
 				});
 			});
@@ -391,7 +415,7 @@ sap.ui.define([
 			aCols.push({
 				label: 'DOB',
 				property: 'dob',
-				type:  EdmType.Date,
+				type: EdmType.Date,
 				format: 'dd-mm-yyyy h:mm:ss AM/PM',
 				width: 25
 			});
@@ -577,81 +601,105 @@ sap.ui.define([
 			dragSession.setComplexData("draggedRowContext", dragRow.getBindingContext());
 		},
 		onDropTable: function (oEvent) {
-				var dragSession = oEvent.getParameter("dragSession");
-				var draggedRowContext = dragSession.getComplexData("draggedRowContext");
-				var dragTab = parseInt(oEvent.getSource().getId().split("-")[4]);
-				if (!draggedRowContext) {
-					return;
-				}
-				var dragTab = parseInt(draggedRowContext.getPath().split("/")[3]);
-				var dragLine = parseInt(draggedRowContext.getPath().split("/")[5]);
-				var droppedRow = oEvent.getParameter("droppedControl");
-				if (droppedRow && droppedRow instanceof sap.m.ColumnListItem) {
-					var dropPosition = oEvent.getParameter("dropPosition");
-					var droppedRowContext = droppedRow.getBindingContext();
-					var droppedTab = parseInt(droppedRowContext.getPath().split("/")[3]);
-					var droppedLine = parseInt(droppedRowContext.getPath().split("/")[5]);
-					var oTabModel = droppedRow.getParent().getModel();
-					var oTabResult = oTabModel.getData().tableData.tables
+			var dragSession = oEvent.getParameter("dragSession");
+			var draggedRowContext = dragSession.getComplexData("draggedRowContext");
+			var dragTab = parseInt(oEvent.getSource().getId().split("-")[4]);
+			if (!draggedRowContext) {
+				return;
+			}
+			var dragTab = parseInt(draggedRowContext.getPath().split("/")[3]);
+			var dragLine = parseInt(draggedRowContext.getPath().split("/")[5]);
+			var droppedRow = oEvent.getParameter("droppedControl");
+			if (droppedRow && droppedRow instanceof sap.m.ColumnListItem) {
+				var dropPosition = oEvent.getParameter("dropPosition");
+				var droppedRowContext = droppedRow.getBindingContext();
+				var droppedTab = parseInt(droppedRowContext.getPath().split("/")[3]);
+				var droppedLine = parseInt(droppedRowContext.getPath().split("/")[5]);
+				var oTabModel = droppedRow.getParent().getModel();
+				var oTabResult = oTabModel.getData().tableData.tables
 
-					if (dragTab === droppedTab) {
+				if (dragTab === droppedTab) {
 
-						var newRowContext = oTabResult[dragTab].items[dragLine];
-						oTabResult[droppedTab].items.splice(droppedLine, 0, newRowContext)
-						oTabResult[dragTab].items.splice(dragLine, 1)
-					}
-					if (dragTab !== droppedTab) {
-						if (oEvent.getParameter("dropPosition") == "After")
-							var iNewRowIndex = droppedLine + 1;
-						else
-							var iNewRowIndex = droppedLine;
-						var newRowContext = oTabResult[dragTab].items[dragLine];
-						oTabResult[droppedTab].items.splice(iNewRowIndex, 0, newRowContext)
-						oTabResult[dragTab].items.splice(dragLine, 1)
-
-					}
-				} else {
-					var oTabResult = oEvent.getParameter("droppedControl").getModel().getData().tableData.tables;
-					var droppedTab = oEvent.getParameter("droppedControl").getId().split("-")[4];
 					var newRowContext = oTabResult[dragTab].items[dragLine];
-					oTabResult[droppedTab].items.push(newRowContext);
+					oTabResult[droppedTab].items.splice(droppedLine, 0, newRowContext)
 					oTabResult[dragTab].items.splice(dragLine, 1)
 				}
-				oEvent.getParameter("droppedControl").getParent().getModel().refresh(true)
+				if (dragTab !== droppedTab) {
+					if (oEvent.getParameter("dropPosition") == "After")
+						var iNewRowIndex = droppedLine + 1;
+					else
+						var iNewRowIndex = droppedLine;
+					var newRowContext = oTabResult[dragTab].items[dragLine];
+					oTabResult[droppedTab].items.splice(iNewRowIndex, 0, newRowContext)
+					oTabResult[dragTab].items.splice(dragLine, 1)
 
-				// var oDraggedItem = oEvent.getParameter("draggedControl");
-				// var dropTable = oEvent.getParameter("droppedControl");
-				// var dragSession = oEvent.getParameter("dragSession");
-				// var draggedRowContext = dragSession.getComplexData("draggedRowContext");
-
-				// var dragTable = oDraggedItem.getParent()
-				// 	// var dropTable = oDroppedItem.getParent()
-				// var dragTblIndex = dragTable.getBindingContext().getPath().split("/")[3]
-				// var dropTblIndex = dropTable.getBindingContext().getPath().split("/")[3]
-
-				// var oDraggedItemContext = oDraggedItem.getBindingContext();
-				// if (!oDraggedItemContext) {
-				// 	return;
-				// }
-				// // if (oDroppedItem instanceof sap.m.ColumnListItem) {
-
-				// // }
-				// var data = oDraggedItem.getBindingContext().getObject()
-				// var i = oDraggedItem.getBindingContextPath().split("/").slice(-1)[0]
-				// dragTable.getModel().getData().tableData.tables[dragTblIndex].items.splice(i, 1)
-				// // dragTable.getModel().getData().avproduct.splice(i, 1)
-				// dropTable.getModel().getData().tableData.tables[dropTblIndex].items.push(data)
-				// dragTable.getModel().refresh(true)
-				// dropTable.getModel().refresh(true)
+				}
+			} else {
+				var oTabResult = oEvent.getParameter("droppedControl").getModel().getData().tableData.tables;
+				var droppedTab = oEvent.getParameter("droppedControl").getId().split("-")[4];
+				var newRowContext = oTabResult[dragTab].items[dragLine];
+				oTabResult[droppedTab].items.push(newRowContext);
+				oTabResult[dragTab].items.splice(dragLine, 1)
 			}
-			/**
-			 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
-			 * (NOT before the first rendering! onInit() is used for that one!).
-			 * @memberOf BasicControls.BasicControls.view.SecondView
-			 */
-			//	onBeforeRendering: function() {
-			//
-			//	},
+			oEvent.getParameter("droppedControl").getParent().getModel().refresh(true)
+
+			// var oDraggedItem = oEvent.getParameter("draggedControl");
+			// var dropTable = oEvent.getParameter("droppedControl");
+			// var dragSession = oEvent.getParameter("dragSession");
+			// var draggedRowContext = dragSession.getComplexData("draggedRowContext");
+
+			// var dragTable = oDraggedItem.getParent()
+			// 	// var dropTable = oDroppedItem.getParent()
+			// var dragTblIndex = dragTable.getBindingContext().getPath().split("/")[3]
+			// var dropTblIndex = dropTable.getBindingContext().getPath().split("/")[3]
+
+			// var oDraggedItemContext = oDraggedItem.getBindingContext();
+			// if (!oDraggedItemContext) {
+			// 	return;
+			// }
+			// // if (oDroppedItem instanceof sap.m.ColumnListItem) {
+
+			// // }
+			// var data = oDraggedItem.getBindingContext().getObject()
+			// var i = oDraggedItem.getBindingContextPath().split("/").slice(-1)[0]
+			// dragTable.getModel().getData().tableData.tables[dragTblIndex].items.splice(i, 1)
+			// // dragTable.getModel().getData().avproduct.splice(i, 1)
+			// dropTable.getModel().getData().tableData.tables[dropTblIndex].items.push(data)
+			// dragTable.getModel().refresh(true)
+			// dropTable.getModel().refresh(true)
+		},
+		myFactory: function (sId, oContext) {
+			var Value = oContext.getProperty("Amount");
+			var element;
+			if (Value > 0) {
+				element = new sap.m.Text({
+					text: "{demoModel>Amount}"
+				});
+			} else {
+				element = new sap.m.Input({
+					value: "{demoModel>Amount}"
+				});
+			}
+
+			return new sap.m.ColumnListItem({
+				cells: [new sap.m.Text({
+						text: "{demoModel>Name}"
+					}),
+					new sap.m.Text({
+						text: "{demoModel>City}"
+					}),
+					element
+				]
+			});
+		},
+		/**
+		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
+		 * (NOT before the first rendering! onInit() is used for that one!).
+		 * @memberOf BasicControls.BasicControls.view.SecondView
+		 */
+		//	onBeforeRendering: function() {
+		//
+		//	},
 
 		/**
 		 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.

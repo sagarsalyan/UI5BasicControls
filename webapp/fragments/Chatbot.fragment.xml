@@ -13,7 +13,7 @@
 			</Bar>
 		</customHeader>
 		<content><HBox></HBox>
-		<VBox id="id_VBChatWindow"></VBox>
+		<ScrollContainer id="id_VBChatWindow"></ScrollContainer>
 	</content>
 	<beginButton>
 		<HBox>
