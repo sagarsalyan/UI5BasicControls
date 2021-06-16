@@ -1,0 +1,41 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:uxap="sap.uxap">
+	<Dialog id="dialogid" title="Action Plan" draggable="true" contentWidth="100%" contentHeight="100%">
+		<buttons>
+			<!--<Button text="Update" press="onUpdate"/>-->
+			<Button text="OK" press="onPressClose"/>
+		</buttons>
+		<content>
+			<IconTabBar class="sapUiResponsiveContentPadding" items="{/}" stretchContentHeight="true">
+				<items>
+					<IconTabFilter text="{title}">
+						<uxap:ObjectPageLayout showAnchorBar="true" enableLazyLoading="false" flexEnabled="true">
+							<uxap:headerTitle>
+								<uxap:ObjectPageHeader objectTitle="{text}" isObjectIconAlwaysVisible="true" objectSubtitle="Status: {text}"></uxap:ObjectPageHeader>
+							</uxap:headerTitle>
+							<uxap:sections>
+								<uxap:ObjectPageSection>
+									<uxap:subSections>
+										<uxap:ObjectPageSubSection title="Section1" mode="Expanded">
+											<uxap:blocks>
+												<Text text="{text}"/>
+											</uxap:blocks>
+										</uxap:ObjectPageSubSection>
+									</uxap:subSections>
+								</uxap:ObjectPageSection>
+								<uxap:ObjectPageSection>
+									<uxap:subSections>
+										<uxap:ObjectPageSubSection title="Section2" mode="Expanded">
+											<uxap:blocks>
+												<Text text="{text}"/>
+											</uxap:blocks>
+										</uxap:ObjectPageSubSection>
+									</uxap:subSections>
+								</uxap:ObjectPageSection>
+							</uxap:sections>
+						</uxap:ObjectPageLayout>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>

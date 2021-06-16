@@ -497,6 +497,30 @@ sap.ui.define([
 				title : text
 			})
 		},
+		openActionPlan:function(oEvent){
+			if (!this._ActionPlanDialog) {
+				this._ActionPlanDialog = sap.ui.xmlfragment(
+					"BasicControls.BasicControls.fragments.ActionPlan",
+					this
+				);
+				this.getView().addDependent(this._ActionPlanDialog);
+			}
+			this._ActionPlanDialog.open();
+			
+			
+			var actionplans = [
+				{
+					title:"Action Plan1",
+					text:"Something1"
+				},
+				{
+					title:"Action Plan2",
+					text:"Something2"
+				}
+			];
+			var oModel = new sap.ui.model.json.JSONModel(actionplans)
+			this._ActionPlanDialog.setModel(oModel);
+		},
 		onAfterRendering: function () {
 			var inp = this.getView().byId("name");
 			// inp.onkeypress = function(){

@@ -6,6 +6,7 @@
 			<pages>
 				<Page id="page" title="{i18n>title}" enableScrolling="true">
 					<content>
+						<Button text="Open Actio Plan" press="openActionPlan"/>
 						<!--   Menu  -->
 						<!-- Created a fragment called Menu inside fragment folder-->
 						<VBox>
