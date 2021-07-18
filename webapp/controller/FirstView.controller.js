@@ -5,7 +5,7 @@ sap.ui.define([
 	"sap/m/MessageToast",
 	"sap/m/GroupHeaderListItem",
 	"BasicControls/BasicControls/js/demo"
-], function (Controller, EventBus, Fragment, MessageToast,GroupHeaderListItem) {
+], function (Controller, EventBus, Fragment, MessageToast, GroupHeaderListItem) {
 	"use strict";
 
 	return Controller.extend("BasicControls.BasicControls.controller.FirstView", {
@@ -225,31 +225,36 @@ sap.ui.define([
 			var processModel = new sap.ui.model.json.JSONModel(processData)
 			this.getView().byId("processflow1").setModel(processModel)
 				//ProcessFlowData
-				
-				
-				//Grouping list
-				var productList = [{
-					Name:"TV",
-					Type:"EL"
-				},{
-					Name:"Radio",
-					Type:"EL"
-				},{
-					Name:"AC",
-					Type:"EL"
-				},{
-					Name:"Rice",
-					Type:"PA"
-				},{
-					Name:"Wheat",
-					Type:"PA"
-				},{
-					Name:"Bajra",
-					Type:"PA"
-				}];
-				var productListModel = new sap.ui.model.json.JSONModel(productList)
+
+			//Grouping list
+			var productList = [{
+				Name: "TV",
+				Type: "EL"
+			}, {
+				Name: "Radio",
+				Type: "EL"
+			}, {
+				Name: "AC",
+				Type: "EL"
+			}, {
+				Name: "Rice",
+				Type: "PA"
+			}, {
+				Name: "Wheat",
+				Type: "PA"
+			}, {
+				Name: "Bajra",
+				Type: "PA"
+			}];
+			var productListModel = new sap.ui.model.json.JSONModel(productList)
 			this.getView().byId("ShortProductList").setModel(productListModel)
 				//Grouping list
+
+			var sRootPath = jQuery.sap.getModulePath("BasicControls.BasicControls");
+			var imageModel = new sap.ui.model.json.JSONModel({
+				path: sRootPath,
+			});
+			this.getView().setModel(imageModel, "imageModel");
 		},
 		onButtonPress: function (oEvent) {
 			debugger;
@@ -303,6 +308,17 @@ sap.ui.define([
 				this._oPopover.openBy(oButton);
 			}
 		},
+		onTablebind:function(oEvent){
+			var odata = this.getView().getModel("JSON");
+			this.getView().byId("tblStudent").setModel(odata);
+		},
+		onStudentSearch: function (oEvent) {
+			debugger
+			var oBindings = this.getView().byId("tblStudent").getBinding("rows");
+			var sQuery = oEvent.getParameter('newValue');
+			oBindings.filter(new sap.ui.model.Filter("name", "Contains", sQuery));
+			
+		},
 
 		handleMenuItemPress: function (oEvent) {
 			var msg = "'" + oEvent.getParameter("item").getText() + "' pressed";
@@ -335,6 +351,7 @@ sap.ui.define([
 		onSecond: function () {
 			var route = new sap.ui.core.UIComponent.getRouterFor(this);
 			route.navTo("Second", true);
+			// route.getTargets().display("SecondView"); //routing
 		},
 		onRowSelect: function (oEvent) {
 			MessageToast.show(oEvent.getSource().getParent().getBindingContext("JSON").getObject().name)
@@ -420,22 +437,22 @@ sap.ui.define([
 			// sap.m.MessageToast.show("Hello");
 			// Value / Text entered by User
 			if (vInWrittenVal) {
-				that.fnAddContentToChatWindowFromPost(vInWrittenVal,"self");
+				that.fnAddContentToChatWindowFromPost(vInWrittenVal, "self");
 				that.fnChatInputPost(vInWrittenVal); //----- Calling Written Input Post method to get response ----- //
 			}
 		},
 		liveChangeWriteReply: function (oEvent) {
 
 		},
-		fnAddContentToChatWindowFromPost: function (vTextVal,msgType) {
+		fnAddContentToChatWindowFromPost: function (vTextVal, msgType) {
 			var that = this;
 			var View = that.getView();
 			// var justifyContent = msgType === "self" ? "End" : "Start";
 			var direction = msgType === "self" ? "RowReverse" : "Row";
-			
+
 			var oVBox = sap.ui.getCore().byId("id_VBChatWindow");
 			var oFBoxBotIP = new sap.m.FlexBox({
-				direction:direction,
+				direction: direction,
 				justifyContent: "Start"
 			});
 			var icon = "sap-icon://customer"
@@ -443,7 +460,7 @@ sap.ui.define([
 				src: icon
 			});
 			oFBoxBotIP.addItem(oIcon);
-			
+
 			var oBotText = new sap.m.Text({
 				text: vTextVal
 			}).addStyleClass("cssChatMessage");
@@ -478,7 +495,7 @@ sap.ui.define([
 					} else {
 						that.vBotResText = 'Sorry, we can not help you right now, please connect to us after sometime';
 					}
-					that.fnAddContentToChatWindowFromPost(that.vBotResText,"bot"); //--- Calling method for setting value to Chat Bot Window --- //
+					that.fnAddContentToChatWindowFromPost(that.vBotResText, "bot"); //--- Calling method for setting value to Chat Bot Window --- //
 					//$("div").scrollTop(6000);
 				},
 				error: function (Response) {
@@ -487,17 +504,17 @@ sap.ui.define([
 			});
 		},
 		//SAP Conversational AI
-		getType:function(oEvent){
+		getType: function (oEvent) {
 			return oEvent.getProperty('Type');
 		},
-		getGroupHeader:function(oEvent){
-			if(oEvent.key === "EL") var text = "Electronics";
-			else if(oEvent.key === "PA") text = "Paddy";
+		getGroupHeader: function (oEvent) {
+			if (oEvent.key === "EL") var text = "Electronics";
+			else if (oEvent.key === "PA") text = "Paddy";
 			return new GroupHeaderListItem({
-				title : text
+				title: text
 			})
 		},
-		openActionPlan:function(oEvent){
+		openActionPlan: function (oEvent) {
 			if (!this._ActionPlanDialog) {
 				this._ActionPlanDialog = sap.ui.xmlfragment(
 					"BasicControls.BasicControls.fragments.ActionPlan",
@@ -506,18 +523,17 @@ sap.ui.define([
 				this.getView().addDependent(this._ActionPlanDialog);
 			}
 			this._ActionPlanDialog.open();
-			
-			
-			var actionplans = [
-				{
-					title:"Action Plan1",
-					text:"Something1"
-				},
-				{
-					title:"Action Plan2",
-					text:"Something2"
-				}
-			];
+
+			var actionplans = [{
+				title: "Action Plan1",
+				text: "Something1"
+			}, {
+				title: "Action Plan2",
+				text: "Something2"
+			}, {
+				title: "Action Plan3",
+				text: "Something3"
+			}];
 			var oModel = new sap.ui.model.json.JSONModel(actionplans)
 			this._ActionPlanDialog.setModel(oModel);
 		},

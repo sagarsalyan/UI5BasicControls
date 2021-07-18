@@ -18,6 +18,7 @@
 										<uxap:ObjectPageSubSection title="Section1" mode="Expanded">
 											<uxap:blocks>
 												<Text text="{text}"/>
+												<Image id="idImage" src="{imageModel>/path}/icon/usericon.png" height="50px" width="50px"/>
 											</uxap:blocks>
 										</uxap:ObjectPageSubSection>
 									</uxap:subSections>

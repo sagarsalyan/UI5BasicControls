@@ -477,6 +477,13 @@ sap.ui.define([
 		},
 		onSelectionChange: function (oEvent) {
 			debugger
+			oEvent.getParameter('listItem').addStyleClass('cssSelectedBg');
+			oEvent.getParameter('listItem').addCustomData(new sap.ui.core.CustomData({
+				key: "selected",
+				value: "true",
+				writeToDom: true
+
+			}))
 		},
 		onTotal: function (oEvent) {
 			debugger
@@ -692,6 +699,27 @@ sap.ui.define([
 				]
 			});
 		},
+		onXLSXDownload: function (oEvent) {
+
+			var data = [{
+				"name": "John",
+				"city": "Seattle"
+			}, {
+				"name": "Mike",
+				"city": "Los Angeles"
+			}, {
+				"name": "Zach",
+				"city": "New York"
+			}]
+			var ws = XLSX.utils.json_to_sheet(data);
+
+			/* Create a new empty workbook, then add the worksheet */
+			var wb = XLSX.utils.book_new();
+			XLSX.utils.book_append_sheet(wb, ws, "People");
+
+			/* Generate xlsx files */
+			XLSX.writeFile(wb, "sheetjs.xlsx");
+		},
 		/**
 		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
 		 * (NOT before the first rendering! onInit() is used for that one!).
@@ -714,9 +742,10 @@ sap.ui.define([
 		 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
 		 * @memberOf BasicControls.BasicControls.view.SecondView
 		 */
-		//	onExit: function() {
-		//
-		//	}
+		onExit: function () {
+			debugger;
+			console.log("Exit");
+		}
 
 	});
 
