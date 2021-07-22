@@ -6,7 +6,31 @@
 			<pages>
 				<Page id="page" title="{i18n>title}" enableScrolling="true">
 					<content>
-						
+						<GenericTile header="Revenue Dynamics" frameType="TwoByOne" press="press">
+							<tileContent>
+								<TileContent unit="" footer="" tooltip="qq">
+									<content>
+										<NumericContent value="2" icon="" withMargin="false" tooltip="ss"/>
+									</content>
+								</TileContent>
+							</tileContent>
+							<tileContent>
+								<TileContent >
+									<content>
+										<microchart:ColumnMicroChart size="Responsive" tooltip="">
+											<microchart:columns>
+												<microchart:ColumnMicroChartData value="65" color="Error"/>
+												<microchart:ColumnMicroChartData value="90" color="Error"/>
+												<microchart:ColumnMicroChartData value="75" color="Error"/>
+												<microchart:ColumnMicroChartData value="95" color="Error"/>
+												<microchart:ColumnMicroChartData value="100" color="Error"/>
+												<microchart:ColumnMicroChartData value="90" color="Error"/>
+											</microchart:columns>
+										</microchart:ColumnMicroChart>
+									</content>
+								</TileContent>
+							</tileContent>
+						</GenericTile>
 						<Image id="idImage" src="{imageModel>/path}/icon/usericon.png" height="50px" width="50px"/>
 						<Button text="Open Actio Plan" press="openActionPlan"/>
 						<!--   Menu  -->
@@ -176,28 +200,6 @@
 								<StandardListItem title="{Name}"/>
 							</items>
 						</List>
-						<GenericTile header="Revenue Dynamics" frameType="OneByOne" press="press">
-							<tileContent>
-								<TileContent footer="Column chart">
-									<content>
-										<microchart:ColumnMicroChart size="Responsive">
-											<microchart:columns>
-												<microchart:ColumnMicroChartData value="65" color="Error"/>
-												<microchart:ColumnMicroChartData value="90" color="Error"/>
-												<microchart:ColumnMicroChartData value="75" color="Error"/>
-												<microchart:ColumnMicroChartData value="95" color="Error"/>
-												<microchart:ColumnMicroChartData value="100" color="Error"/>
-												<microchart:ColumnMicroChartData value="90" color="Error"/>
-											</microchart:columns>
-										</microchart:ColumnMicroChart>
-									</content>
-								</TileContent>
-							</tileContent>
-							<tooltip>
-								<core:TooltipBase text="SOmetext"/>
-								<core:TooltipBase text="yhOmetext"/>
-							</tooltip>
-						</GenericTile>
 					</content>
 					<footer>
 						<OverflowToolbar>

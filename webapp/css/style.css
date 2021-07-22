@@ -25,6 +25,7 @@
 .cssSelectedBg {
 	background-color:#000000;
 }
+
 tr[data-selected="true"]{
 background: #dcca3e !important;
 }

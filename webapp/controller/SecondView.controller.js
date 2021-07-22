@@ -477,13 +477,13 @@ sap.ui.define([
 		},
 		onSelectionChange: function (oEvent) {
 			debugger
-			oEvent.getParameter('listItem').addStyleClass('cssSelectedBg');
+			// oEvent.getParameter('listItem').addStyleClass('cssSelectedBg');
 			oEvent.getParameter('listItem').addCustomData(new sap.ui.core.CustomData({
 				key: "selected",
 				value: "true",
 				writeToDom: true
 
-			}))
+			}));
 		},
 		onTotal: function (oEvent) {
 			debugger
