@@ -31,6 +31,20 @@
 								</TileContent>
 							</tileContent>
 						</GenericTile>
+						<GenericTile header="Comparison Chart" frameType="OneByOne" press="press">
+							<tileContent>
+								<TileContent >
+									<content>
+										<microchart:ComparisonMicroChart scale="Nos" size="Responsive" tooltip="">
+											<microchart:data>
+												<microchart:ComparisonMicroChartData  title="MTD" value="10" color="#b5ac47" press="onMTDPress"/>
+												<microchart:ComparisonMicroChartData  title="YTD" value="50" color="#b02e2e" press="onYTDPress"/>
+											</microchart:data>
+										</microchart:ComparisonMicroChart>
+									</content>
+								</TileContent>
+							</tileContent>
+						</GenericTile>
 						<Image id="idImage" src="{imageModel>/path}/icon/usericon.png" height="50px" width="50px"/>
 						<Button text="Open Actio Plan" press="openActionPlan"/>
 						<!--   Menu  -->
