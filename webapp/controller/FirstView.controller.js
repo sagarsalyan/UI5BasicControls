@@ -17,6 +17,11 @@ sap.ui.define([
 
 			//Menu
 			debugger;
+			var inputModel = new sap.ui.model.json.JSONModel({
+				vis1:'X',
+				vis2:''
+			});
+			this.getView().byId("inputBox").setModel(inputModel);
 
 			this.getView().byId("idDateRange").setDateValue(new Date());
 			this.getView().byId("idDateRange").setSecondDateValue(new Date());
