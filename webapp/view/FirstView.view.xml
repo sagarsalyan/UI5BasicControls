@@ -6,7 +6,7 @@
 			<pages>
 				<Page id="page" title="{i18n>title}" enableScrolling="true">
 					<content>
-						<MultiComboBox id="testFuncImport" items="{path:'ZMDM_FUZZY_SRV>/SystemType', parameters: { custom: { 'Type': '\'value1\' } }}">
+						<MultiComboBox id="testFuncImport" items="{path:'ZMDM_FUZZY_SRV>/SystemType', parameters: { custom: { 'Type': '\'value1\'' } }}">
 							<core:Item key="{Id}" text="{Text}"/>
 						</MultiComboBox>
 						<Input id="inputBox" editable="{= (${vis1} === 'X') || (${vis2} === 'X')}"/>
