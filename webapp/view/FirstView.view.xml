@@ -6,6 +6,9 @@
 			<pages>
 				<Page id="page" title="{i18n>title}" enableScrolling="true">
 					<content>
+						<MultiComboBox id="testFuncImport" items="{path:'ZMDM_FUZZY_SRV>/SystemType', parameters: { custom: { 'Type': '\'value1\' } }}">
+							<core:Item key="{Id}" text="{Text}"/>
+						</MultiComboBox>
 						<Input id="inputBox" editable="{= (${vis1} === 'X') || (${vis2} === 'X')}"/>
 						<GenericTile header="Revenue Dynamics" frameType="TwoByOne" press="press">
 							<tileContent>
@@ -38,8 +41,8 @@
 									<content>
 										<microchart:ComparisonMicroChart scale="Nos" size="Responsive" tooltip="">
 											<microchart:data>
-												<microchart:ComparisonMicroChartData  title="MTD" value="10" color="#b5ac47" press="onMTDPress"/>
-												<microchart:ComparisonMicroChartData  title="YTD" value="50" color="#b02e2e" press="onYTDPress"/>
+												<microchart:ComparisonMicroChartData title="MTD" value="10" color="#b5ac47" press="onMTDPress"/>
+												<microchart:ComparisonMicroChartData title="YTD" value="50" color="#b02e2e" press="onYTDPress"/>
 											</microchart:data>
 										</microchart:ComparisonMicroChart>
 									</content>

@@ -10,8 +10,17 @@
 		"title": "{{appTitle}}",
 		"description": "{{appDescription}}",
 		"sourceTemplate": {
-			"id": "ui5template.basicSAPUI5ApplicationProject",
-			"version": "1.40.12"
+			"id": "servicecatalog.connectivityComponentForManifest",
+			"version": "0.0.0"
+		},
+		"dataSources": {
+			"ZMDM_FUZZY_SRV": {
+				"uri": "/sap/opu/odata/sap/ZMDM_FUZZY_SRV/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/metadata.xml"
+				}
+			}
 		}
 	},
 	"sap.ui": {
@@ -60,6 +69,16 @@
 			"JSON": {
 				"type": "sap.ui.model.json.JSONModel",
 				"uri": "model/data.json"
+			},
+			"ZMDM_FUZZY_SRV": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "ZMDM_FUZZY_SRV",
+				"preload": true
 			}
 		},
 		"resources": {

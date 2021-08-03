@@ -22,6 +22,11 @@ sap.ui.define([
 				vis2:''
 			});
 			this.getView().byId("inputBox").setModel(inputModel);
+			
+			var funcImpModel = new sap.ui.model.json.JSONModel({
+				value:'X',
+			});
+			this.getView().byId("testFuncImport").setModel(funcImpModel);
 
 			this.getView().byId("idDateRange").setDateValue(new Date());
 			this.getView().byId("idDateRange").setSecondDateValue(new Date());

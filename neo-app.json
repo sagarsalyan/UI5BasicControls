@@ -36,6 +36,15 @@
         "entryPath": "/test-resources"
       },
       "description": "SAPUI5 Test Resources"
+    },
+    {
+      "path": "/sap/opu/odata",
+      "target": {
+        "type": "destination",
+        "name": "Airdit_HANA",
+        "entryPath": "/sap/opu/odata"
+      },
+      "description": "Airdit_HANA"
     }
   ],
   "sendWelcomeFileRedirect": true
