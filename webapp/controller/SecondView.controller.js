@@ -745,6 +745,81 @@ sap.ui.define([
 		onExit: function () {
 			debugger;
 			console.log("Exit");
+		},
+
+		odataV2BatchOperation: function () {
+			//the content of this method is only for knowledge purpose, there in no table in XML and not "this.getView().getModel()"
+			debugger;
+			
+			var oModel = this.getView().getModel(),
+				oTable = this._oTable, // Your Table that you will get item's data.
+				iLength = oTable.getItems("items").length,
+				oItem,
+				sPath,
+				bError = false;
+
+			// Distinguish your request from other batch requests like below.
+
+			oModel.setDeferredBatchGroups(["myId"]);
+
+			for (var i = 0; i < iLength; i++) {
+
+				var oEntry = {},
+					oParams = {};
+
+				// You need to show your message that returns from backend the latest.
+
+				if (i === (iLength - 1)) {
+
+					oParams.success = function (oData, oResponse) {
+						sap.ui.core.BusyIndicator.hide();
+						MessageToast.show(this._oResourceBundle.getText("PROCESS_SUCCESS"));
+						// debugger;
+
+					}.bind(this);
+
+					oParams.error = function (oError) {
+						// debugger;
+						sap.ui.core.BusyIndicator.hide();
+						var oJson = JSON.parse(oError.responseText);
+						this._bIsError = true;
+						var oJson = JSON.parse(oError.responseText);
+						var oMsgBox = sap.ca.ui.message.showMessageBox({
+							type: sap.ca.ui.message.Type.ERROR,
+							message: oJson.error.message.value
+						});
+
+						if (!sap.ui.Device.support.touch) {
+							oMsgBox.addStyleClass("sapUiSizeCompact");
+						}
+
+						oModel.refresh();
+
+					}.bind(this);
+
+				}
+
+				oParams.async = false;
+				oParams.batchGroupId = "myId";
+
+				oItem = oTable.getItems("items")[i];
+				sPath = oItem.getBindingContextPath();
+
+				// needing to bind yourSpecific Json Model to Table's item aggregation.
+				// in this scenario, 
+				oEntry = this._getViewModel().getProperty(oItem.getBindingContextPath());
+
+				sap.ui.core.BusyIndicator.show(0);
+				oModel.create("/YourEntitySet", oEntry, oParams);
+			}
+
+			if (bError === true) {
+				return;
+			}
+
+			oModel.submitChanges({
+				groupId: "myId"
+			});
 		}
 
 	});
