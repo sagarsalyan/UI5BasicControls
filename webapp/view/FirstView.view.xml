@@ -6,6 +6,11 @@
 			<pages>
 				<Page id="page" title="{i18n>title}" enableScrolling="true">
 					<content>
+						<HBox width="100%">
+							<DatePicker change="onDateChange" />
+							<Text id="idWeek"/>
+							
+						</HBox>
 						<MultiComboBox id="testFuncImport" items="{path:'ZMDM_FUZZY_SRV>/SystemType', parameters: { custom: { 'Type': '\'value1\'' } }}">
 							<core:Item key="{Id}" text="{Text}"/>
 						</MultiComboBox>

@@ -18,13 +18,13 @@ sap.ui.define([
 			//Menu
 			debugger;
 			var inputModel = new sap.ui.model.json.JSONModel({
-				vis1:'X',
-				vis2:''
+				vis1: 'X',
+				vis2: ''
 			});
 			this.getView().byId("inputBox").setModel(inputModel);
-			
+
 			var funcImpModel = new sap.ui.model.json.JSONModel({
-				value:'X',
+				value: 'X',
 			});
 			this.getView().byId("testFuncImport").setModel(funcImpModel);
 
@@ -318,7 +318,7 @@ sap.ui.define([
 				this._oPopover.openBy(oButton);
 			}
 		},
-		onTablebind:function(oEvent){
+		onTablebind: function (oEvent) {
 			var odata = this.getView().getModel("JSON");
 			this.getView().byId("tblStudent").setModel(odata);
 		},
@@ -327,7 +327,7 @@ sap.ui.define([
 			var oBindings = this.getView().byId("tblStudent").getBinding("rows");
 			var sQuery = oEvent.getParameter('newValue');
 			oBindings.filter(new sap.ui.model.Filter("name", "Contains", sQuery));
-			
+
 		},
 
 		handleMenuItemPress: function (oEvent) {
@@ -546,6 +546,17 @@ sap.ui.define([
 			}];
 			var oModel = new sap.ui.model.json.JSONModel(actionplans)
 			this._ActionPlanDialog.setModel(oModel);
+		},
+		onDateChange: function (oEvent) {
+			debugger
+			var date = oEvent.getSource().getDateValue();
+			var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday',
+					'Thursday', 'Friday', 'Saturday'
+				],
+				prefixes = ['First', 'Second', 'Third', 'Fourth', 'Fifth'];
+
+			var week = prefixes[Math.floor(date.getDate() / 7)] + ' ' + days[date.getDay()];
+			this.getView().byId("idWeek").setText(week);
 		},
 		onAfterRendering: function () {
 			var inp = this.getView().byId("name");
