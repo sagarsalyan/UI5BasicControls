@@ -9,7 +9,7 @@
 					<Label text="Text" design="Bold" class="cssDanger"/>
 					<VBox>
 						<Button text="Download XLSX" press="onXLSXDownload"/>
-						<ui:Table id="idResultsTable" visibleRowCountMode="Auto"></ui:Table>
+						<ui:Table id="idResultsTable" visibleRowCount="5"></ui:Table>
 						<HBox>
 							<Button text="DownloadCSV" press="onDownloadCSV"/>
 							<Button text="DownloadSpreedSheet" press="onDownloadSS"/>

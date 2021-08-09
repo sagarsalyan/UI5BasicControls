@@ -734,9 +734,7 @@ sap.ui.define([
 		 * This hook is the same one that SAPUI5 controls get after being rendered.
 		 * @memberOf BasicControls.BasicControls.view.SecondView
 		 */
-		//	onAfterRendering: function() {
-		//
-		//	},
+		
 
 		/**
 		 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
@@ -750,7 +748,7 @@ sap.ui.define([
 		odataV2BatchOperation: function () {
 			//the content of this method is only for knowledge purpose, there in no table in XML and not "this.getView().getModel()"
 			debugger;
-			
+
 			var oModel = this.getView().getModel(),
 				oTable = this._oTable, // Your Table that you will get item's data.
 				iLength = oTable.getItems("items").length,
@@ -820,7 +818,26 @@ sap.ui.define([
 			oModel.submitChanges({
 				groupId: "myId"
 			});
-		}
+		},
+		onAfterRendering: function () {
+			this._resizeTableRow();
+		},
+		_resizeTableRow: function () {
+
+			var oTable = this.getView().byId("idResultsTable");
+			var sTop = $('#' + oTable.getId()).offset().top;
+
+			var sHeight = $(document).height();
+
+			//if there a row, you can take the row Height
+			//var iRowHeight = $(oTable.getAggregation("rows")[0].getDomRef()).height();
+
+			var iRowHeight = 40;
+
+			var iRows = Math.trunc((sHeight - sTop) / iRowHeight);
+
+			oTable.setVisibleRowCount(iRows);
+		},
 
 	});
 

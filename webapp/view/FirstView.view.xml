@@ -11,6 +11,11 @@
 							<Text id="idWeek"/>
 							
 						</HBox>
+						<ComboBox id="notTypableCombo">
+							<items>
+								<core:Item text="Some"/>
+							</items>
+						</ComboBox>
 						<MultiComboBox id="testFuncImport" items="{path:'ZMDM_FUZZY_SRV>/SystemType', parameters: { custom: { 'Type': '\'value1\'' } }}">
 							<core:Item key="{Id}" text="{Text}"/>
 						</MultiComboBox>

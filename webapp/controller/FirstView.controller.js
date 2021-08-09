@@ -583,6 +583,17 @@ sap.ui.define([
 			//SAP Conversational AI integration
 			this.getBot()
 				//SAP Conversational AI integration
+				
+				
+				
+            this.getView().byId("notTypableCombo").addEventDelegate({
+            onclick: () => {
+              this.getView().byId("notTypableCombo").open();
+            },
+            onkeydown: (e) => {
+              e.preventDefault();
+            },
+          });
 		}
 
 	});
