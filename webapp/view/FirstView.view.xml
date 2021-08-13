@@ -6,6 +6,8 @@
 			<pages>
 				<Page id="page" title="{i18n>title}" enableScrolling="true">
 					<content>
+						<Input name="sname"/>
+						<Input name="sname"/>
 						<HBox width="100%">
 							<DatePicker change="onDateChange" />
 							<Text id="idWeek"/>
@@ -14,6 +16,12 @@
 						<ComboBox id="notTypableCombo">
 							<items>
 								<core:Item text="Some"/>
+							</items>
+						</ComboBox>
+						<ComboBox id="notTypableCombo2" change="handleComboChange">
+							<items>
+								<core:Item text="Some" key="some"/>
+								<core:Item text="Some2" key="some2"/>
 							</items>
 						</ComboBox>
 						<MultiComboBox id="testFuncImport" items="{path:'ZMDM_FUZZY_SRV>/SystemType', parameters: { custom: { 'Type': '\'value1\'' } }}">
@@ -228,6 +236,9 @@
 								<StandardListItem title="{Name}"/>
 							</items>
 						</List>
+						<FlexBox id="idFlexBox">
+							<Button text="Open Dialog" press="openDialog"/>
+						</FlexBox>
 					</content>
 					<footer>
 						<OverflowToolbar>

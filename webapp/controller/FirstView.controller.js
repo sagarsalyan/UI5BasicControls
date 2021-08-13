@@ -265,6 +265,59 @@ sap.ui.define([
 				path: sRootPath,
 			});
 			this.getView().setModel(imageModel, "imageModel");
+
+			//ComboBinding
+			var oCombo1 = new sap.m.ComboBox({
+				placeholder: "Plant"
+			});
+			var oTemplate = new sap.ui.core.ListItem();
+			oTemplate.bindProperty("key", "Notificationno");
+			oTemplate.bindProperty("text", "Notificationno");
+			oTemplate.bindProperty("additionalText", "Notificationno");
+			// oCombo.bindAggregation("items","/PMNOTIF_STRUCT_HEADERDETAILSSet",oTemplate);
+			oCombo1.bindItems("/PMNOTIF_STRUCT_HEADERDETAILSSet", oTemplate);
+			this.getView().byId("idFlexBox").addItem(oCombo1);
+			var oCombo2 = new sap.m.ComboBox({
+				placeholder: "Noti",
+				items: {
+					path: "/PMNOTIF_STRUCT_HEADERDETAILSSet",
+					template: new sap.ui.core.ListItem({
+						key: "{Notificationno}",
+						text: "{Notificationno}"
+					})
+				}
+
+			});
+			this.getView().byId("idFlexBox").addItem(oCombo2);
+
+			// this.DropDownDialog = new sap.m.Dialog({
+			// 	content: [
+			// 		oCombo2
+			// 	]
+			// });
+			// dialog.open();
+			//ComboBinding
+		},
+		openDialog: function (oEvent) {
+			// this.DropDownDialog.open();
+			var dropDownDialog = new sap.m.Dialog({
+				content: [
+					new sap.m.ComboBox({
+						placeholder: "Noti",
+						items: {
+							path: "/PMNOTIF_STRUCT_HEADERDETAILSSet",
+							template: new sap.ui.core.ListItem({
+								key: "{Notificationno}",
+								text: "{Notificationno}"
+							})
+						}
+
+					})
+				]
+			});
+			dropDownDialog.open();
+			dropDownDialog.setModel(this.getView().getModel());
+			
 		},
 		onButtonPress: function (oEvent) {
 			debugger;
@@ -558,6 +611,15 @@ sap.ui.define([
 			var week = prefixes[Math.floor(date.getDate() / 7)] + ' ' + days[date.getDay()];
 			this.getView().byId("idWeek").setText(week);
 		},
+		handleComboChange: function (oEvent) {
+			var oValidatedComboBox = oEvent.getSource(),
+				sSelectedKey = oValidatedComboBox.getSelectedKey(),
+				sValue = oValidatedComboBox.getValue();
+
+			if (!sSelectedKey && sValue) {
+				oValidatedComboBox.setValue("");
+			}
+		},
 		onAfterRendering: function () {
 			var inp = this.getView().byId("name");
 			// inp.onkeypress = function(){
@@ -583,17 +645,15 @@ sap.ui.define([
 			//SAP Conversational AI integration
 			this.getBot()
 				//SAP Conversational AI integration
-				
-				
-				
-            this.getView().byId("notTypableCombo").addEventDelegate({
-            onclick: () => {
-              this.getView().byId("notTypableCombo").open();
-            },
-            onkeydown: (e) => {
-              e.preventDefault();
-            },
-          });
+
+			this.getView().byId("notTypableCombo").addEventDelegate({
+				onclick: () => {
+					this.getView().byId("notTypableCombo").open();
+				},
+				onkeydown: (e) => {
+					e.preventDefault();
+				},
+			});
 		}
 
 	});

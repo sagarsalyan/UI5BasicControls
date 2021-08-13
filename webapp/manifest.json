@@ -20,6 +20,13 @@
 				"settings": {
 					"localUri": "localService/metadata.xml"
 				}
+			},
+			"ZPM_NOTIFICATION_SRV": {
+				"uri": "/sap/opu/odata/sap/ZPM_NOTIFICATION_SRV/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/ZPM_NOTIFICATION_SRV/metadata.xml"
+				}
 			}
 		}
 	},
@@ -78,6 +85,16 @@
 					"defaultCountMode": "Request"
 				},
 				"dataSource": "ZMDM_FUZZY_SRV",
+				"preload": true
+			},
+			"": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "ZPM_NOTIFICATION_SRV",
 				"preload": true
 			}
 		},

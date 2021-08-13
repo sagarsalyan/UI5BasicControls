@@ -1,5 +1,5 @@
 function initModel() {
-	var sUrl = "/sap/opu/odata/sap/ZMDM_FUZZY_SRV/";
+	var sUrl = "/sap/opu/odata/sap/ZPM_NOTIFICATION_SRV/";
 	var oModel = new sap.ui.model.odata.ODataModel(sUrl, true);
 	sap.ui.getCore().setModel(oModel);
 }
