@@ -239,6 +239,9 @@
 						<FlexBox id="idFlexBox">
 							<Button text="Open Dialog" press="openDialog"/>
 						</FlexBox>
+						<FlexBox id="idFlexBox2">
+							<Button text="RunJQuery" id="btnJquery" press="onRunJQuery"/>
+						</FlexBox>
 					</content>
 					<footer>
 						<OverflowToolbar>

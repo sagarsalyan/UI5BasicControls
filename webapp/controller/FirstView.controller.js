@@ -317,7 +317,7 @@ sap.ui.define([
 			});
 			dropDownDialog.open();
 			dropDownDialog.setModel(this.getView().getModel());
-			
+
 		},
 		onButtonPress: function (oEvent) {
 			debugger;
@@ -653,6 +653,13 @@ sap.ui.define([
 				onkeydown: (e) => {
 					e.preventDefault();
 				},
+			});
+
+			debugger
+			var btnID = this.getView().byId("btnJquery").getId();
+			$('#' + btnID).click(function () {
+				// call new function
+				alert("You clicked JQuery")
 			});
 		}
 
