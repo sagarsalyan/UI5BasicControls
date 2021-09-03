@@ -6,12 +6,44 @@
 			<pages>
 				<Page id="page" title="{i18n>title}" enableScrolling="true">
 					<content>
+						<VBox>
+						<HBox>
+							<TimePicker id="curTime" value="{path:'timeModel>/currentTime',type:'sap.ui.model.odata.type.Time'}"/>
+							<Button press="onCurrentTimeDisplay" text="Show Time"/>
+						</HBox>
+						<HBox>
+							<TimePicker id="curTime2" value="{path:'timeModel>/currentTime',type:'sap.ui.model.type.Time'}"/>
+							<Button press="onCurrentTimeDisplay2" text="Show Time"/>
+						</HBox>
+						</VBox>
+						<RadioButtonGroup id="rbg1" selectedIndex="{radioModel>/text}" columns="3" width="100%" class="sapUiMediumMarginBottom">
+							<RadioButton id="RB1-1" text="Long Option Number 1" />
+							<RadioButton id="RB1-2" text="Option 2" />
+							<RadioButton id="RB1-3" text="Nr. 3"  />
+							<RadioButton id="RB1-4" text="Long Option 4" />
+							<RadioButton id="RB1-5" text="Option 5" />
+							<RadioButton id="RB1-6" text="Nr. 6" />
+						</RadioButtonGroup>
+						<Button text="CheckModel" press="radioCheckModel"/>
+						<CheckBox text="Test" editable="false" selected="true"/>
+						<Tree id="Tree" items="{path: '/'}">
+							<CustomTreeItem>
+								<FlexBox alignItems="Start" width="100%">
+									<items>
+										<Text visible="{title}" text="{name}"/>
+										<CheckBox visible="{= !${title}}" text="{name}"/>
+									</items>
+								</FlexBox>
+								<!--<Tree items="{path: 'students'}">-->
+								<!--	<StandardTreeItem title="{name}"/>-->
+								<!--</Tree>-->
+							</CustomTreeItem>
+						</Tree>
 						<Input name="sname"/>
 						<Input name="sname"/>
 						<HBox width="100%">
-							<DatePicker change="onDateChange" />
+							<DatePicker change="onDateChange"/>
 							<Text id="idWeek"/>
-							
 						</HBox>
 						<ComboBox id="notTypableCombo">
 							<items>
@@ -75,12 +107,19 @@
 							<MultiComboBox id="mulCombo" width="30%" items="{ path: 'model>/ProductCollection', sorter: { path: 'model>Name' } }">
 								<core:Item key="{model>ProductId}" text="{model>Name}"/>
 							</MultiComboBox>
-							<SegmentedButton selectedKey="kids">
+							<SegmentedButton selectedKey="none">
 								<items>
 									<SegmentedButtonItem text="Kids" key="kids" press="onKidPress"/>
 									<SegmentedButtonItem text="Adultss" press="myName('Sagar')"/>
 									<SegmentedButtonItem text="Seniors"/>
 								</items>
+							</SegmentedButton>
+							<SegmentedButton selectedKey="None">
+								<buttons>
+									<Button text="Component"/>
+									<Button text="Component"/>
+									<Button text="Component"/>
+								</buttons>
 							</SegmentedButton>
 							<Button press="onPress" text="Test"/>
 							<MultiInput id="mulInput" width="30%" showValueHelp="false" suggestionItems="{model>/ProductCollection}" placeholder="MultiInput">

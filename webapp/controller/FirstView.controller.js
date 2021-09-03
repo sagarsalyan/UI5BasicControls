@@ -1,11 +1,13 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
+	"sap/ui/core/LocaleData",
 	"sap/ui/core/EventBus",
 	"sap/ui/core/Fragment",
 	"sap/m/MessageToast",
 	"sap/m/GroupHeaderListItem",
-	"BasicControls/BasicControls/js/demo"
-], function (Controller, EventBus, Fragment, MessageToast, GroupHeaderListItem) {
+	"BasicControls/BasicControls/js/demo",
+	
+], function (Controller,LocaleData, EventBus, Fragment, MessageToast, GroupHeaderListItem) {
 	"use strict";
 
 	return Controller.extend("BasicControls.BasicControls.controller.FirstView", {
@@ -17,11 +19,33 @@ sap.ui.define([
 
 			//Menu
 			debugger;
+
+			var radioModel = new sap.ui.model.json.JSONModel({
+				text: 2
+			});
+			this.getView().byId("rbg1").setModel(radioModel, "radioModel");
+
 			var inputModel = new sap.ui.model.json.JSONModel({
 				vis1: 'X',
 				vis2: ''
 			});
 			this.getView().byId("inputBox").setModel(inputModel);
+
+			var treeModel = new sap.ui.model.json.JSONModel([{
+				"name": 'Class1',
+				"title": true,
+				"students": [{
+						"name": "Sagar",
+						"title": false,
+					}, {
+						"name": "Sunil",
+						"title": false,
+					}
+
+				]
+
+			}]);
+			this.getView().byId("Tree").setModel(treeModel);
 
 			var funcImpModel = new sap.ui.model.json.JSONModel({
 				value: 'X',
@@ -619,6 +643,41 @@ sap.ui.define([
 			if (!sSelectedKey && sValue) {
 				oValidatedComboBox.setValue("");
 			}
+		},
+		radioCheckModel: function (oEvent) {
+			debugger
+		},
+		onCurrentTimeDisplay: function () {
+			//way1
+			var now = new Date(),
+				then = new Date(
+					now.getFullYear(),
+					now.getMonth(),
+					now.getDate(),
+					0, 0, 0),
+				nowTime = now.getTime() - then.getTime();
+			var timeModel = new sap.ui.model.json.JSONModel({
+				currentTime: {
+					__edmType: "Edm.Time",
+					ms: nowTime
+				}
+			});
+			this.getView().byId("curTime").setModel(timeModel, "timeModel");
+
+			
+		},
+		onCurrentTimeDisplay2:function(oEvent){
+			// way2
+			var nowTime = {
+					"currentTime": new Date()
+				};
+			var oLocale = sap.ui.getCore().getConfiguration().getLocale(),
+				oLocaleData = new LocaleData(oLocale),
+				oModel;
+
+			nowTime["dtPattern"] = oLocaleData.getTimePattern("medium");
+			var timeModel = new sap.ui.model.json.JSONModel(nowTime);
+			this.getView().byId("curTime2").setModel(timeModel, "timeModel");	
 		},
 		onAfterRendering: function () {
 			var inp = this.getView().byId("name");
