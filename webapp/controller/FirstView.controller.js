@@ -6,8 +6,8 @@ sap.ui.define([
 	"sap/m/MessageToast",
 	"sap/m/GroupHeaderListItem",
 	"BasicControls/BasicControls/js/demo",
-	
-], function (Controller,LocaleData, EventBus, Fragment, MessageToast, GroupHeaderListItem) {
+
+], function (Controller, LocaleData, EventBus, Fragment, MessageToast, GroupHeaderListItem) {
 	"use strict";
 
 	return Controller.extend("BasicControls.BasicControls.controller.FirstView", {
@@ -16,6 +16,67 @@ sap.ui.define([
 			// var studModel=new sap.ui.model.json.JSONModel();
 			// studModel.loadData("model/data.json");
 			// sap.ui.getCore().setModel(studModel);
+
+			//Vizframe
+			var oModel = new sap.ui.model.json.JSONModel({
+				myData: [{
+						"Dept": "Harsh",
+						"Sales": 40
+					}, {
+						"Dept": "Shiva",
+						"Sales": 20
+					}, {
+						"Dept": "Kolakani",
+						"Sales": 30
+					}]
+			});
+			this.getView().byId("idVizFrame").setModel(oModel, "vizModel");
+			this.getView().byId("idVizFrame").setVizProperties({
+				plotArea: {
+
+					dataLabel: {
+						visible: true,
+						showTotal: true
+					},
+					gridline: {
+						visible: false
+					},
+					drawingEffect: 'glossy'
+				},
+				valueAxis: {
+					label: {
+						visible: true,
+						style: {
+							fontWeight: 'bold'
+						}
+					},
+					title: {
+						text: "Count",
+						visible: true,
+						style: {
+							fontWeight: 'bold'
+						}
+					}
+				},
+				categoryAxis: {
+					title: {
+						visible: true,
+						style: {
+							fontWeight: 'bold'
+						}
+					},
+					label: {
+						visible: true,
+						style: {
+							fontWeight: 'bold'
+						}
+					}
+				},
+				title: {
+					visible: true,
+					text: "Ssss"
+				}
+			});
 
 			//Menu
 			debugger;
@@ -664,20 +725,19 @@ sap.ui.define([
 			});
 			this.getView().byId("curTime").setModel(timeModel, "timeModel");
 
-			
 		},
-		onCurrentTimeDisplay2:function(oEvent){
+		onCurrentTimeDisplay2: function (oEvent) {
 			// way2
 			var nowTime = {
-					"currentTime": new Date()
-				};
+				"currentTime": new Date()
+			};
 			var oLocale = sap.ui.getCore().getConfiguration().getLocale(),
 				oLocaleData = new LocaleData(oLocale),
 				oModel;
 
 			nowTime["dtPattern"] = oLocaleData.getTimePattern("medium");
 			var timeModel = new sap.ui.model.json.JSONModel(nowTime);
-			this.getView().byId("curTime2").setModel(timeModel, "timeModel");	
+			this.getView().byId("curTime2").setModel(timeModel, "timeModel");
 		},
 		onAfterRendering: function () {
 			var inp = this.getView().byId("name");

@@ -1,28 +1,29 @@
 <mvc:View controllerName="BasicControls.BasicControls.controller.FirstView" xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.ui.layout.form"
 	displayBlock="true" xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:l="sap.ui.layout" xmlns:u="sap.ui.unified" xmlns:core="sap.ui.core"
-	xmlns:commons="sap.suite.ui.commons" xmlns:microchart="sap.suite.ui.microchart">
+	xmlns:commons="sap.suite.ui.commons" xmlns:microchart="sap.suite.ui.microchart" xmlns:viz.data="sap.viz.ui5.data"
+	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz="sap.viz.ui5.controls">
 	<Shell id="shell">
 		<App id="app">
 			<pages>
 				<Page id="page" title="{i18n>title}" enableScrolling="true">
 					<content>
 						<VBox>
-						<HBox>
-							<TimePicker id="curTime" value="{path:'timeModel>/currentTime',type:'sap.ui.model.odata.type.Time'}"/>
-							<Button press="onCurrentTimeDisplay" text="Show Time"/>
-						</HBox>
-						<HBox>
-							<TimePicker id="curTime2" value="{path:'timeModel>/currentTime',type:'sap.ui.model.type.Time'}"/>
-							<Button press="onCurrentTimeDisplay2" text="Show Time"/>
-						</HBox>
+							<HBox>
+								<TimePicker id="curTime" value="{path:'timeModel>/currentTime',type:'sap.ui.model.odata.type.Time'}"/>
+								<Button press="onCurrentTimeDisplay" text="Show Time"/>
+							</HBox>
+							<HBox>
+								<TimePicker id="curTime2" value="{path:'timeModel>/currentTime',type:'sap.ui.model.type.Time'}"/>
+								<Button press="onCurrentTimeDisplay2" text="Show Time"/>
+							</HBox>
 						</VBox>
 						<RadioButtonGroup id="rbg1" selectedIndex="{radioModel>/text}" columns="3" width="100%" class="sapUiMediumMarginBottom">
-							<RadioButton id="RB1-1" text="Long Option Number 1" />
-							<RadioButton id="RB1-2" text="Option 2" />
-							<RadioButton id="RB1-3" text="Nr. 3"  />
-							<RadioButton id="RB1-4" text="Long Option 4" />
-							<RadioButton id="RB1-5" text="Option 5" />
-							<RadioButton id="RB1-6" text="Nr. 6" />
+							<RadioButton id="RB1-1" text="Long Option Number 1"/>
+							<RadioButton id="RB1-2" text="Option 2"/>
+							<RadioButton id="RB1-3" text="Nr. 3"/>
+							<RadioButton id="RB1-4" text="Long Option 4"/>
+							<RadioButton id="RB1-5" text="Option 5"/>
+							<RadioButton id="RB1-6" text="Nr. 6"/>
 						</RadioButtonGroup>
 						<Button text="CheckModel" press="radioCheckModel"/>
 						<CheckBox text="Test" editable="false" selected="true"/>
@@ -55,6 +56,11 @@
 								<core:Item text="Some" key="some"/>
 								<core:Item text="Some2" key="some2"/>
 							</items>
+						</ComboBox>
+						<ComboBox showSecondaryValues="true">
+							<core:ListItem key="1" text="First" additionalText="1"/>
+							<core:ListItem key="2" text="Second" additionalText="2"/>
+							<core:ListItem key="3" text="Third" additionalText="3"/>
 						</ComboBox>
 						<MultiComboBox id="testFuncImport" items="{path:'ZMDM_FUZZY_SRV>/SystemType', parameters: { custom: { 'Type': '\'value1\'' } }}">
 							<core:Item key="{Id}" text="{Text}"/>
@@ -89,12 +95,41 @@
 							<tileContent>
 								<TileContent >
 									<content>
-										<microchart:ComparisonMicroChart scale="Nos" size="Responsive" tooltip="">
+										<microchart:ComparisonMicroChart size="Responsive" tooltip="">
 											<microchart:data>
-												<microchart:ComparisonMicroChartData title="MTD" value="10" color="#b5ac47" press="onMTDPress"/>
-												<microchart:ComparisonMicroChartData title="YTD" value="50" color="#b02e2e" press="onYTDPress"/>
+												<microchart:ComparisonMicroChartData title="MTD" value="101USD" color="#b5ac47" press="onMTDPress"/>
+												<microchart:ComparisonMicroChartData title="MTD" value="101USD" color="#b5ac47" press="onMTDPress"/>
+												<microchart:ComparisonMicroChartData title="MTD" value="101USD" color="#b5ac47" press="onMTDPress"/>
+												<microchart:ComparisonMicroChartData title="YTD" value="50USD" color="#b02e2e" press="onYTDPress"/>
 											</microchart:data>
 										</microchart:ComparisonMicroChart>
+									</content>
+								</TileContent>
+							</tileContent>
+						</GenericTile>
+						<GenericTile header="Revenue Dynamics" frameType="TwoByOne" press="press">
+							<tileContent>
+								<TileContent unit="" footer="" tooltip="qq">
+									<content>
+										<NumericContent value="2" icon="" withMargin="false" tooltip="ss"/>
+									</content>
+								</TileContent>
+							</tileContent>
+							<tileContent>
+								<TileContent >
+									<content>
+										<microchart:StackedBarMicroChart size="Responsive" press="press">
+											<microchart:bars>
+												<microchart:StackedBarMicroChartBar value="20" valueColor="Error"/>
+												<microchart:StackedBarMicroChartBar value="40" valueColor="Critical"/>
+												<microchart:StackedBarMicroChartBar value="50" valueColor="Good"/>
+											</microchart:bars>
+										</microchart:StackedBarMicroChart>
+										<microchart:StackedBarMicroChart size="Responsive" press="press">
+											<microchart:bars>
+												<microchart:StackedBarMicroChartBar value="20" valueColor="Error"/>
+											</microchart:bars>
+										</microchart:StackedBarMicroChart>
 									</content>
 								</TileContent>
 							</tileContent>
@@ -281,6 +316,25 @@
 						<FlexBox id="idFlexBox2">
 							<Button text="RunJQuery" id="btnJquery" press="onRunJQuery"/>
 						</FlexBox>
+						<VBox>
+							<viz:VizFrame id="idVizFrame" vizType="column">
+								<viz:dataset>
+									<viz.data:FlattenedDataset data="{vizModel>/myData}">
+										<viz.data:dimensions>
+											<viz.data:DimensionDefinition name="Dept" value="{vizModel>Dept}"/>
+										</viz.data:dimensions>
+										<viz.data:measures>
+											<viz.data:MeasureDefinition name="Sales" value="{vizModel>Sales}"/>
+										</viz.data:measures>
+									</viz.data:FlattenedDataset>
+								</viz:dataset>
+								<viz:feeds>
+									<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Sales"/>
+									<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Dept"/>
+								</viz:feeds>
+							</viz:VizFrame>
+							
+						</VBox>
 					</content>
 					<footer>
 						<OverflowToolbar>
