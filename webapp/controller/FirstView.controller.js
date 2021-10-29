@@ -488,6 +488,7 @@ sap.ui.define([
 			debugger;
 			$.ajax({
 				url: "https://my-json-server.typicode.com/sagarsalyan/fake-json/profiles",
+				 async: true,
 				success: function (result) {
 					debugger;
 				},
@@ -495,6 +496,7 @@ sap.ui.define([
 					debugger;
 				}
 			});
+			sap.m.MessageToast.show("Executed");
 		},
 		onSecond: function () {
 			var route = new sap.ui.core.UIComponent.getRouterFor(this);

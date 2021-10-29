@@ -152,6 +152,82 @@ sap.ui.define([
 			});
 			this.getView().byId("ID_DEMO").setModel(demoModel, "demoModel");
 			//FactoryMethod
+
+			//Merged UI Table
+			var jsonData = [{
+				a: "1",
+				b: "Column"
+			}, {
+				a: "2",
+				b: "Column n"
+			}, {
+				a: "1",
+				b: "Column s"
+			}, {
+				a: "2",
+				b: "Column"
+			}, {
+				a: "2",
+				b: "Column s"
+			}, {
+				a: "Test s",
+				b: "Column"
+			}, {
+				a: "Test s",
+				b: "Column s"
+			}];
+			var jsonModel = new sap.ui.model.json.JSONModel(jsonData);
+
+			var oTable = new sap.ui.table.Table({
+				id: "table",
+				selectionMode: sap.ui.table.SelectionMode.None,
+				visibleRowCount: 7,
+				columns: [new sap.ui.table.Column({
+						label: "Test",
+						id: "id2",
+						visible: true,
+						showSortMenuEntry: false,
+						template: new sap.m.Text({
+							text: "{a}"
+						}),
+						sortProperty: "a"
+					}),
+					new sap.ui.table.Column({
+						label: "Column",
+						id: "id3",
+						visible: true,
+						template: new sap.m.Text({
+							text: "{b}"
+						})
+					})
+				]
+			});
+			this.getView().byId("mergeTableBox").addItem(oTable);
+			sap.ui.getCore().byId("table").setModel(jsonModel).bindRows("/");
+
+			var oColumn = oTable.getColumns()[0];
+			oTable.sort(oColumn);
+			//Aggregate first column for similar values
+			oTable.onAfterRendering = function () {
+				sap.ui.table.Table.prototype.onAfterRendering.apply(this, arguments);
+				var aRows = oTable.getRows();
+				if (aRows && aRows.length > 0) {
+					var pRow = {};
+					for (var i = 0; i < aRows.length; i++) {
+						if (i > 0) {
+							var pCell = pRow.getCells()[0],
+								cCell = aRows[i].getCells()[0];
+							if (cCell.getText() === pCell.getText()) {
+								$("#" + cCell.getId()).css("visibility", "hidden");
+								$("#" + pRow.getId() + "-col0").css("border-bottom-style", "hidden");
+							}
+						}
+						pRow = aRows[i];
+					}
+				}
+			};
+
+			//Merged UI Table
 		},
 
 		_handleRouteMatched: function (oEvent) {
@@ -734,7 +810,6 @@ sap.ui.define([
 		 * This hook is the same one that SAPUI5 controls get after being rendered.
 		 * @memberOf BasicControls.BasicControls.view.SecondView
 		 */
-		
 
 		/**
 		 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
