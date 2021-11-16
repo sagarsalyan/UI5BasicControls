@@ -11,6 +11,7 @@ sap.ui.define([
 	"use strict";
 
 	return Controller.extend("BasicControls.BasicControls.controller.FirstView", {
+
 		onInit: function () {
 
 			// var studModel=new sap.ui.model.json.JSONModel();
@@ -20,15 +21,15 @@ sap.ui.define([
 			//Vizframe
 			var oModel = new sap.ui.model.json.JSONModel({
 				myData: [{
-						"Dept": "Harsh",
-						"Sales": 40
-					}, {
-						"Dept": "Shiva",
-						"Sales": 20
-					}, {
-						"Dept": "Kolakani",
-						"Sales": 30
-					}]
+					"Dept": "Harsh",
+					"Sales": 40
+				}, {
+					"Dept": "Shiva",
+					"Sales": 20
+				}, {
+					"Dept": "Kolakani",
+					"Sales": 30
+				}]
 			});
 			this.getView().byId("idVizFrame").setModel(oModel, "vizModel");
 			this.getView().byId("idVizFrame").setVizProperties({
@@ -382,6 +383,54 @@ sap.ui.define([
 			// });
 			// dialog.open();
 			//ComboBinding
+			
+			
+			//mockdata for value help
+			this.oColModel = new sap.ui.model.json.JSONModel(sap.ui.require.toUrl("BasicControls/BasicControls/mockdata/columnsModel.json"));
+			this.oProductsModel = new sap.ui.model.json.JSONModel(sap.ui.require.toUrl("BasicControls/BasicControls/mockdata/products.json"));
+			this.getView().setModel(this.oProductsModel);
+			//mockdata for value help
+		},
+		openValueHelp: function (oEvent) {
+			Fragment.load({
+				name: "BasicControls.BasicControls.fragments.ValueHelpDialog",
+				controller: this
+			}).then(function name(oFragment) {
+				this._oValueHelpDialog = oFragment;
+				this.getView().addDependent(this._oValueHelpDialog);
+				this._oBasicSearchField = new sap.m.SearchField();
+				var oFilterBar = this._oValueHelpDialog.getFilterBar();
+				oFilterBar.setFilterBarExpanded(false);
+				oFilterBar.setBasicSearch(this._oBasicSearchField);
+				this._oValueHelpDialog.getTableAsync().then(function (oTable) {
+					
+					oTable.setModel(this.oProductsModel);
+				
+					oTable.setModel(this.oColModel, "columns");
+
+					if (oTable.bindRows) {
+						oTable.bindAggregation("rows", "/ProductCollection");
+					}
+
+					if (oTable.bindItems) {
+						oTable.bindAggregation("items", "/ProductCollection", function () {
+							return new ColumnListItem({
+								cells: aCols.map(function (column) {
+									return new Label({
+										text: "{" + column.template + "}"
+									});
+								})
+							});
+						});
+					}
+
+					this._oValueHelpDialog.update();
+				}.bind(this));
+				this._oValueHelpDialog.open();
+			}.bind(this));
+		},
+		onFilterBarSearch:function(oEvent){
+			
 		},
 		openDialog: function (oEvent) {
 			// this.DropDownDialog.open();
@@ -488,7 +537,7 @@ sap.ui.define([
 			debugger;
 			$.ajax({
 				url: "https://my-json-server.typicode.com/sagarsalyan/fake-json/profiles",
-				 async: true,
+				async: true,
 				success: function (result) {
 					debugger;
 				},

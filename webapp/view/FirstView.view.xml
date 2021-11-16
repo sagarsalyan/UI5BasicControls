@@ -8,6 +8,7 @@
 				<Page id="page" title="{i18n>title}" enableScrolling="true">
 					<content>
 						<VBox>
+							<Button text="Open Value Help" press="openValueHelp" />
 							<HBox>
 								<TimePicker id="curTime" value="{path:'timeModel>/currentTime',type:'sap.ui.model.odata.type.Time'}"/>
 								<Button press="onCurrentTimeDisplay" text="Show Time"/>
