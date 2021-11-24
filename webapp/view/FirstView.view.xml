@@ -7,8 +7,9 @@
 			<pages>
 				<Page id="page" title="{i18n>title}" enableScrolling="true">
 					<content>
+						<core:Fragment fragmentName="BasicControls.BasicControls.fragments.ReusablePart" type="XML"/>
 						<VBox>
-							<Button text="Open Value Help" press="openValueHelp" />
+							<Button text="Open Value Help" press="openValueHelp"/>
 							<HBox>
 								<TimePicker id="curTime" value="{path:'timeModel>/currentTime',type:'sap.ui.model.odata.type.Time'}"/>
 								<Button press="onCurrentTimeDisplay" text="Show Time"/>
@@ -334,7 +335,6 @@
 									<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Dept"/>
 								</viz:feeds>
 							</viz:VizFrame>
-							
 						</VBox>
 					</content>
 					<footer>

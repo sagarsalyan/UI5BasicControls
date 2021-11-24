@@ -22,5 +22,14 @@
 				</fb:filterGroupItems>
 			</fb:FilterBar>
 		</filterBar>
+		<beginButton>
+			<m:Button text="Begin"/>
+		</beginButton>
+		<endButton>
+			<m:Button text="End"/>
+		</endButton>
+		<buttons>
+			<m:Button text="Button"/>
+		</buttons>
 	</ValueHelpDialog>
 </core:FragmentDefinition>
