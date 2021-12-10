@@ -229,6 +229,16 @@ sap.ui.define([
 
 			//Merged UI Table
 		},
+		onButtonPress: function (oEvent) {
+			debugger;
+			var oData = {
+				message: "View 2 button was clicked."
+			};
+
+			var oEventBus = this.getOwnerComponent().getEventBus();
+			oEventBus.publish("View2","_onButtonPress", oData);
+
+		},
 
 		_handleRouteMatched: function (oEvent) {
 			debugger;

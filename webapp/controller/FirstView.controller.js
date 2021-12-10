@@ -142,8 +142,10 @@ sap.ui.define([
 			//Menu
 
 			//EventBus
-			var oEventBus = sap.ui.getCore().getEventBus();
-			oEventBus.subscribe("_onButtonPress", this._onButtonPress, this);
+			debugger
+			var oEventBus = this.getOwnerComponent().getEventBus();
+			oEventBus.subscribe("View1","evtPress1", this._onButtonPress, this);
+			oEventBus.subscribe("View2","evtPress1", this._onButtonPress, this);
 			//EventBus
 
 			//ProcessFlowData
@@ -459,15 +461,15 @@ sap.ui.define([
 				message: "View 1 button was clicked."
 			};
 
-			var oEventBus = sap.ui.getCore().getEventBus();
-			oEventBus.publish("_onButtonPress", oEvent, oData);
+			var oEventBus = this.getOwnerComponent().getEventBus();
+			oEventBus.publish("View1","_onButtonPress", oData);
 
 		},
 
-		_onButtonPress: function (oEvent, oData) {
+		_onButtonPress: function (sChannel,oEvent, oData) {
 			debugger
 			var sMessage = oData.message;
-			sap.m.MessageToast.show("sMessage");
+			sap.m.MessageToast.show(sMessage);
 
 		},
 
@@ -549,7 +551,7 @@ sap.ui.define([
 		},
 		onSecond: function () {
 			var route = new sap.ui.core.UIComponent.getRouterFor(this);
-			route.navTo("Second", true);
+			route.navTo("Second", false);
 			// route.getTargets().display("SecondView"); //routing
 		},
 		onRowSelect: function (oEvent) {

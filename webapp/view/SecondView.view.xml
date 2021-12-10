@@ -8,6 +8,7 @@
 				<content>
 					<Label text="Text" design="Bold" class="cssDanger"/>
 					<VBox>
+						<Button text="Event Bus" press="onButtonPress"/>
 						<Button text="Download XLSX" press="onXLSXDownload"/>
 						<ui:Table id="idResultsTable" visibleRowCount="5"></ui:Table>
 						<HBox>
@@ -448,6 +449,7 @@
 						
 					</HBox>
 					<cust:Button text="Testtt"/>
+					<Button text="Event Bus" press="onButtonPress"/>
 				</content>
 			</Page>
 		</pages>
