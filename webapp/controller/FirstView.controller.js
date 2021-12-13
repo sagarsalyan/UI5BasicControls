@@ -144,8 +144,8 @@ sap.ui.define([
 			//EventBus
 			debugger
 			var oEventBus = this.getOwnerComponent().getEventBus();
-			oEventBus.subscribe("View1","evtPress1", this._onButtonPress, this);
-			oEventBus.subscribe("View2","evtPress1", this._onButtonPress, this);
+			oEventBus.subscribe("View1","evtPress", this._onButtonPress, this);
+			oEventBus.subscribe("View2","evtPress", this._onButtonPress, this);
 			//EventBus
 
 			//ProcessFlowData
@@ -462,7 +462,7 @@ sap.ui.define([
 			};
 
 			var oEventBus = this.getOwnerComponent().getEventBus();
-			oEventBus.publish("View1","_onButtonPress", oData);
+			oEventBus.publish("View1","evtPress", oData);
 
 		},
 

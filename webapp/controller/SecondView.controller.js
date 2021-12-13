@@ -236,7 +236,7 @@ sap.ui.define([
 			};
 
 			var oEventBus = this.getOwnerComponent().getEventBus();
-			oEventBus.publish("View2","_onButtonPress", oData);
+			oEventBus.publish("View2","evtPress", oData);
 
 		},
 
