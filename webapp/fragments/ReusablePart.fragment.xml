@@ -1,3 +1,6 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:uxap="sap.uxap">
-	<Text text="I am inside fragment"/>
+<core:FragmentDefinition id="idFragment" xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:uxap="sap.uxap">
+	<VBox>
+		<Text id="fragText" text="I am inside fragment"/>
+		<Button text="Intside fragment" press="onButtonInsideFragment"/>
+	</VBox>
 </core:FragmentDefinition>

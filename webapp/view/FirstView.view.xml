@@ -7,8 +7,10 @@
 			<pages>
 				<Page id="page" title="{i18n>title}" enableScrolling="true">
 					<content>
-						<core:Fragment fragmentName="BasicControls.BasicControls.fragments.ReusablePart" type="XML"/>
+						<core:Fragment id="idFrag" fragmentName="BasicControls.BasicControls.fragments.ReusablePart" type="XML"/>
+						<Button text="Outside fragment" press="onButtonOutsideFragment" />
 						<VBox>
+							<Input type="Tel" maxLength="10"/>
 							<Button text="Open Value Help" press="openValueHelp"/>
 							<HBox>
 								<TimePicker id="curTime" value="{path:'timeModel>/currentTime',type:'sap.ui.model.odata.type.Time'}"/>

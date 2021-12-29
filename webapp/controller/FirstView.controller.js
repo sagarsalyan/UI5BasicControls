@@ -145,6 +145,7 @@ sap.ui.define([
 			debugger
 			var oEventBus = this.getOwnerComponent().getEventBus();
 			oEventBus.subscribe("View1","evtPress", this._onButtonPress, this);
+			oEventBus.subscribe("View1","evtPress2", this._onButtonPress, this);
 			oEventBus.subscribe("View2","evtPress", this._onButtonPress, this);
 			//EventBus
 
@@ -792,7 +793,16 @@ sap.ui.define([
 			var timeModel = new sap.ui.model.json.JSONModel(nowTime);
 			this.getView().byId("curTime2").setModel(timeModel, "timeModel");
 		},
+		onButtonInsideFragment:function(){
+			var text = this.byId(sap.ui.core.Fragment.createId("idFrag", "fragText")).getText();
+			sap.m.MessageToast.show(text);
+		},
+		onButtonOutsideFragment:function(){
+			var text = this.byId(sap.ui.core.Fragment.createId("idFrag", "fragText")).getText();
+			sap.m.MessageToast.show(text);
+		},
 		onAfterRendering: function () {
+			debugger
 			var inp = this.getView().byId("name");
 			// inp.onkeypress = function(){
 			// 	debugger;	
