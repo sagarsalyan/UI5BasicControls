@@ -18,9 +18,16 @@
 		</content>
 		<footer>
 			<HBox>
-				<Input id="id_IPReply" placeholder="Write something..." submit="onTextEnter" liveChange="liveChangeWriteReply"
-					class="cl_IPWriteReplyResPop"/>
-				<Button id="id_BtnResPopBotonEnter" icon="sap-icon://arrow-right" enabled="true" press="onTextEnter"/>
+				<Input id="id_IPReply" placeholder="Write something..." submit="onTextEnter" liveChange="liveChangeWriteReply" class="cl_IPWriteReplyResPop">
+					<layoutData>
+						<FlexItemData growFactor="5"/>
+					</layoutData>
+				</Input>
+				<Button id="id_BtnResPopBotonEnter" icon="sap-icon://arrow-right" enabled="true" press="onTextEnter">
+					<layoutData>
+						<FlexItemData growFactor="1"/>
+					</layoutData>
+				</Button>
 			</HBox>
 		</footer>
 	</Popover>
