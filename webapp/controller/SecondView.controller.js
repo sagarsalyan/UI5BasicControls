@@ -236,7 +236,7 @@ sap.ui.define([
 			};
 
 			var oEventBus = this.getOwnerComponent().getEventBus();
-			oEventBus.publish("View2","evtPress", oData);
+			oEventBus.publish("View2", "evtPress", oData);
 
 		},
 
@@ -624,9 +624,12 @@ sap.ui.define([
 				"xmlns:w='urn:schemas-microsoft-com:office:word' " +
 				"xmlns='http://www.w3.org/TR/REC-html40'>" +
 				"<head><meta charset='utf-8'><title>Export HTML to Word Document with JavaScript</title></head><body>";
+
+			var content = "<input type='text' value='Sagar'/>";
 			var footer = "</body></html>";
 			// var sourceHTML = header + document.getElementById("SimpleFormChange354").innerHTML + footer;
-			var sourceHTML = header + this.getView().byId("SimpleFormChange354").$().html() + footer;
+			// var sourceHTML = header + this.getView().byId("SimpleFormChange354").$().html() + footer;
+			var sourceHTML = header + content + footer;
 
 			var source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
 			var fileDownload = document.createElement("a");
@@ -635,6 +638,23 @@ sap.ui.define([
 			fileDownload.download = 'document.doc';
 			fileDownload.click();
 			document.body.removeChild(fileDownload);
+		},
+		onPDFPress: function () {
+			var content = "<div style=float:left>" +
+				"<p>School Name        : " + "Satya Narayana High School Perla" + "</p>" +
+				"<p>Owner Name         : " + "Sagar Salyan" + "</p>" +
+				"<p>Owner E-mail       : " + "sagarslyn@gmail.com" + "</p>" +
+				"</div><div style=float:right>" +
+				"<p>Owner Mobile No    : " + "8129482811" + "</p>" +
+				"<p>Owner Staus        : " + "Owned" + "</p>" +
+				"<p>Scholl Address     : " + "Perla" + "</p>" +
+				"</div>";
+			var wind = window.open("", "prntExample");
+			wind.document.write(content);
+			setTimeout(function () {
+				wind.print();
+				wind.close();
+			}, 1000);
 		},
 		onDragAvaliableProductStart: function (oEvent) {
 			var dragRow = oEvent.getParameter("target");
