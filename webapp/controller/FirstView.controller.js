@@ -144,9 +144,9 @@ sap.ui.define([
 			//EventBus
 			debugger
 			var oEventBus = this.getOwnerComponent().getEventBus();
-			oEventBus.subscribe("View1","evtPress", this._onButtonPress, this);
-			oEventBus.subscribe("View1","evtPress2", this._onButtonPress, this);
-			oEventBus.subscribe("View2","evtPress", this._onButtonPress, this);
+			oEventBus.subscribe("View1", "evtPress", this._onButtonPress, this);
+			oEventBus.subscribe("View1", "evtPress2", this._onButtonPress, this);
+			oEventBus.subscribe("View2", "evtPress", this._onButtonPress, this);
 			//EventBus
 
 			//ProcessFlowData
@@ -386,8 +386,7 @@ sap.ui.define([
 			// });
 			// dialog.open();
 			//ComboBinding
-			
-			
+
 			//mockdata for value help
 			this.oColModel = new sap.ui.model.json.JSONModel(sap.ui.require.toUrl("BasicControls/BasicControls/mockdata/columnsModel.json"));
 			this.oProductsModel = new sap.ui.model.json.JSONModel(sap.ui.require.toUrl("BasicControls/BasicControls/mockdata/products.json"));
@@ -406,9 +405,9 @@ sap.ui.define([
 				oFilterBar.setFilterBarExpanded(false);
 				oFilterBar.setBasicSearch(this._oBasicSearchField);
 				this._oValueHelpDialog.getTableAsync().then(function (oTable) {
-					
+
 					oTable.setModel(this.oProductsModel);
-				
+
 					oTable.setModel(this.oColModel, "columns");
 
 					if (oTable.bindRows) {
@@ -432,8 +431,8 @@ sap.ui.define([
 				this._oValueHelpDialog.open();
 			}.bind(this));
 		},
-		onFilterBarSearch:function(oEvent){
-			
+		onFilterBarSearch: function (oEvent) {
+
 		},
 		openDialog: function (oEvent) {
 			// this.DropDownDialog.open();
@@ -463,11 +462,11 @@ sap.ui.define([
 			};
 
 			var oEventBus = this.getOwnerComponent().getEventBus();
-			oEventBus.publish("View1","evtPress", oData);
+			oEventBus.publish("View1", "evtPress", oData);
 
 		},
 
-		_onButtonPress: function (sChannel,oEvent, oData) {
+		_onButtonPress: function (sChannel, oEvent, oData) {
 			debugger
 			var sMessage = oData.message;
 			sap.m.MessageToast.show(sMessage);
@@ -793,13 +792,38 @@ sap.ui.define([
 			var timeModel = new sap.ui.model.json.JSONModel(nowTime);
 			this.getView().byId("curTime2").setModel(timeModel, "timeModel");
 		},
-		onButtonInsideFragment:function(){
+		onButtonInsideFragment: function () {
 			var text = this.byId(sap.ui.core.Fragment.createId("idFrag", "fragText")).getText();
 			sap.m.MessageToast.show(text);
 		},
-		onButtonOutsideFragment:function(){
+		onButtonOutsideFragment: function () {
 			var text = this.byId(sap.ui.core.Fragment.createId("idFrag", "fragText")).getText();
 			sap.m.MessageToast.show(text);
+		},
+		onSaveChart: function (oEvent) {
+			var oVizFrame = this.getView().byId("idVizFrame");
+			var sSVG = oVizFrame.exportToSVGString({
+				width: 800,
+				height: 600
+			});
+
+			// UI5 library bug fix:
+			//    Legend SVG created by UI5 library has transform attribute with extra space
+			//    eg:   transform="translate (-5,0)" but it should be without spaces in string quotes
+			//    tobe: transform="translate(-5,0)
+			sSVG = sSVG.replace(/translate /gm, "translate");
+
+			//Step 2: Create Canvas html Element to add SVG content
+			var oCanvasHTML = document.createElement("canvas");
+			canvg(oCanvasHTML, sSVG); // add SVG content to Canvas
+
+			// STEP 3: Get dataURL for content in Canvas as PNG/JPEG
+			var sImageData = oCanvasHTML.toDataURL("image/png");
+
+			// STEP 4: Create PDF using library jsPDF
+			var oPDF = new jsPDF();
+			oPDF.addImage(sImageData, "PNG", 15, 40, 180, 160);
+			oPDF.save("test.pdf");
 		},
 		onAfterRendering: function () {
 			debugger

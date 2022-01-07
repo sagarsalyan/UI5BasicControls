@@ -337,6 +337,7 @@
 									<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Dept"/>
 								</viz:feeds>
 							</viz:VizFrame>
+							<Button press="onSaveChart" text="Save Chart"/>
 						</VBox>
 					</content>
 					<footer>

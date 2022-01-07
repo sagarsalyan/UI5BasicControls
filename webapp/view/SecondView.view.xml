@@ -112,6 +112,7 @@
 									</Select>
 									<Button text="Download Doc" press="onDocPress"/>
 									<Button text="Download PDF" press="onPDFPress"/>
+									<Button text="Download PDF2" press="onPDFPress2"/>
 								</f:content>
 							</f:SimpleForm>
 						</VBox>
