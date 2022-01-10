@@ -5,7 +5,9 @@
 			<Button text="OK" press="onPressClose"/>
 		</buttons>
 		<content>
-			<IconTabBar class="sapUiResponsiveContentPadding" items="{/}" stretchContentHeight="true">
+			<VBox>
+				<Input id="dlgInp"/>
+				<IconTabBar class="sapUiResponsiveContentPadding" items="{/}" stretchContentHeight="true">
 				<items>
 					<IconTabFilter text="{title}">
 						<uxap:ObjectPageLayout showAnchorBar="true" enableLazyLoading="false" flexEnabled="true">
@@ -37,6 +39,8 @@
 					</IconTabFilter>
 				</items>
 			</IconTabBar>
+			</VBox>
+			
 		</content>
 	</Dialog>
 </core:FragmentDefinition>

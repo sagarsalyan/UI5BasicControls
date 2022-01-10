@@ -724,6 +724,15 @@ sap.ui.define([
 				this.getView().addDependent(this._ActionPlanDialog);
 			}
 			this._ActionPlanDialog.open();
+			
+			//start -----if "idActionPlan" is mentioned for fragment like below
+			// 	this._ActionPlanDialog = sap.ui.xmlfragment("idActionPlan",
+			// 		"BasicControls.BasicControls.fragments.ActionPlan",
+			// 		this
+			// 	);
+			// sap.ui.core.Fragment.byId("idActionPlan","dlgInp").setValue("Added text"); 
+			//end
+			sap.ui.getCore().byId("dlgInp").setValue("Added text");
 
 			var actionplans = [{
 				title: "Action Plan1",
