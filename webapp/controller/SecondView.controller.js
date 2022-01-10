@@ -651,6 +651,7 @@ sap.ui.define([
 				"</div>";
 			var wind = window.open("", "prntExample");
 			wind.document.write(content);
+
 			setTimeout(function () {
 				wind.print();
 				wind.close();
@@ -665,6 +666,65 @@ sap.ui.define([
 
 			// This is to save the data as PDF 
 			sap.ui.core.util.File.save(bin, "filename", "pdf", "application/pdf");
+		},
+		onPDFPress3: function (oEvent) {
+			var columns = [
+
+				{
+					title: "CustomerID",
+					key: "CustomerID"
+				},
+
+				{
+					title: "CompanyName",
+					key: "CompanyName"
+				}
+
+			];
+			var data = [{
+				CustomerID: "1",
+				CompanyName: "Jojo"
+			}]
+
+			var doc = new jsPDF('p', 'pt', 'a2');
+
+			doc.autoTable(columns, data, {});
+
+			doc.save('table.pdf');
+		},
+		onPDFPress4: function (oEvent) {
+			var data = "<html><body><div>Sagar</div><div>Rakshi</div></body></html>";
+			let pdf = new jsPDF('p', 'pt', 'a4');
+			pdf.html(data, {
+				callback: function (doc) {
+					doc.save("test.pdf");
+				}
+			});
+		},
+		onPDFPress5: function (oEvent) {
+			var sRootPath = jQuery.sap.getModulePath("BasicControls.BasicControls") + "/icon/usericon.png";
+			var contents = "<div>Sagar</div>";
+			contents = contents + "<img src='"+sRootPath+"' alt='Girl in a jacket' width='500' height='600'>";
+			contents = contents + "<table><tr><th>Name</th><th>Class</th></tr></table>";
+			var frame1 = document.createElement('iframe');
+			frame1.name = "frame1";
+			frame1.style.position = "absolute";
+			frame1.style.top = "-1000000px";
+			document.body.appendChild(frame1);
+			var frameDoc = (frame1.contentWindow) ? frame1.contentWindow : (frame1.contentDocument.document) ? frame1.contentDocument.document :
+				frame1.contentDocument;
+			frameDoc.document.open();
+			frameDoc.document.write('<html><head><title>DIV Contents</title>');
+			frameDoc.document.write('</head><body>');
+			frameDoc.document.write(contents);
+			frameDoc.document.write('</body></html>');
+			frameDoc.document.close();
+			setTimeout(function () {
+				window.frames["frame1"].focus();
+				window.frames["frame1"].print();
+				document.body.removeChild(frame1);
+			}, 100);
+			return false;
 		},
 		onDragAvaliableProductStart: function (oEvent) {
 			var dragRow = oEvent.getParameter("target");

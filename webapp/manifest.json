@@ -99,16 +99,18 @@
 			}
 		},
 		"resources": {
-			"css": [
-				{
-					"uri": "css/style.css"
-				}
-			],
-			"js": [
-				{
-					"uri": "utils/jspdf.min.js"
-				}
-			]
+			"css": [{
+				"uri": "css/style.css"
+			}],
+			"js": [{
+				"uri": "utils/jspdf.js"
+			},{
+				"uri": "utils/jspdf.min.js"
+			},{
+				"uri": "utils/jspdf.plugin.autotable.js"
+			},{
+				"uri": "utils/jspdf.plugin.autotable.min.js"
+			}]
 		},
 		"routing": {
 			"config": {
@@ -120,20 +122,17 @@
 				"controlId": "app",
 				"clearControlAggregation": false
 			},
-			"routes": [
-				{
-					"name": "RouteFirstView",
-					"pattern": "RouteFirstView",
-					"target": [
-						"TargetFirstView"
-					]
-				},
-				{
-					"name": "Second",
-					"pattern": "Second",
-					"target": "SecondView"
-				}
-			],
+			"routes": [{
+				"name": "RouteFirstView",
+				"pattern": "RouteFirstView",
+				"target": [
+					"TargetFirstView"
+				]
+			}, {
+				"name": "Second",
+				"pattern": "Second",
+				"target": "SecondView"
+			}],
 			"targets": {
 				"TargetFirstView": {
 					"viewType": "XML",

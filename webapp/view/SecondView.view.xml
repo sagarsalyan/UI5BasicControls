@@ -17,7 +17,7 @@
 							<u:FileUploader id="FileUploaderId" sameFilenameAllowed="true" iconOnly="false" buttonOnly="true" fileType="XLSX,xlsx"
 								icon="sap-icon://upload" iconFirst="true" style="Emphasized" change="onUpload"/>
 						</HBox>
-						<Table id="idResultsTablem" selectionChange="onSelectionChange"  class='TableBorder' mode="MultiSelect" sticky="HeaderToolbar,ColumnHeaders"></Table>
+						<Table id="idResultsTablem" selectionChange="onSelectionChange" class='TableBorder' mode="MultiSelect" sticky="HeaderToolbar,ColumnHeaders"></Table>
 						<HBox>
 							<Button text="Send" press="onSend"/>
 							<Button text="Total Mark" press="onTotal"/>
@@ -110,11 +110,14 @@
 											<core:Item text="USA" key="USA"/>
 										</items>
 									</Select>
-									<Button text="Download Doc" press="onDocPress"/>
-									<Button text="Download PDF" press="onPDFPress"/>
-									<Button text="Download PDF2" press="onPDFPress2"/>
 								</f:content>
 							</f:SimpleForm>
+							<Button text="Download Doc" press="onDocPress"/>
+							<Button text="Download PDF" press="onPDFPress"/>
+							<Button text="Download PDF2" press="onPDFPress2"/>
+							<Button text="Download PDF3" press="onPDFPress3"/>
+							<Button text="Download PDF4" press="onPDFPress4"/>
+							<Button text="Download PDF5" press="onPDFPress5"/>
 						</VBox>
 						<VBox class="sapUiSmallMargin">
 							<f:SimpleForm id="SimpleFormChange355" layout="ResponsiveGridLayout" editable="true" title="ANALYSIS REQUEST FORM">
@@ -447,9 +450,7 @@
 							</columns>
 						</Table>
 					</HBox>
-					<HBox id="mergeTableBox">
-						
-					</HBox>
+					<HBox id="mergeTableBox"></HBox>
 					<cust:Button text="Testtt"/>
 					<Button text="Event Bus" press="onButtonPress"/>
 				</content>

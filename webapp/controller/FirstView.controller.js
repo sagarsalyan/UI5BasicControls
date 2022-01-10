@@ -823,6 +823,7 @@ sap.ui.define([
 			// STEP 4: Create PDF using library jsPDF
 			var oPDF = new jsPDF();
 			oPDF.addImage(sImageData, "PNG", 15, 40, 180, 160);
+			oPDF.addImage(sImageData, "PNG", 15, 40, 180, 160);
 			oPDF.save("test.pdf");
 		},
 		onAfterRendering: function () {
