@@ -7,6 +7,7 @@
 			<pages>
 				<Page id="page" title="{i18n>title}" enableScrolling="true">
 					<content>
+						<Button press="onScrollToChart" text="Scroll to chart"/>
 						<core:Fragment id="idFrag" fragmentName="BasicControls.BasicControls.fragments.ReusablePart" type="XML"/>
 						<Button text="Outside fragment" press="onButtonOutsideFragment" />
 						<VBox>

@@ -393,6 +393,11 @@ sap.ui.define([
 			this.getView().setModel(this.oProductsModel);
 			//mockdata for value help
 		},
+		onScrollToChart: function (oEvent) {
+			var oPage = this.getView().byId("page");
+			var oPanel = this.getView().byId("tblStudent");
+			oPage.scrollToElement(oPanel,5);
+		},
 		openValueHelp: function (oEvent) {
 			Fragment.load({
 				name: "BasicControls.BasicControls.fragments.ValueHelpDialog",
@@ -724,7 +729,7 @@ sap.ui.define([
 				this.getView().addDependent(this._ActionPlanDialog);
 			}
 			this._ActionPlanDialog.open();
-			
+
 			//start -----if "idActionPlan" is mentioned for fragment like below
 			// 	this._ActionPlanDialog = sap.ui.xmlfragment("idActionPlan",
 			// 		"BasicControls.BasicControls.fragments.ActionPlan",
