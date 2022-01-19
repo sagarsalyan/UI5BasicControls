@@ -350,6 +350,7 @@ sap.ui.define([
 				//Grouping list
 
 			var sRootPath = jQuery.sap.getModulePath("BasicControls.BasicControls");
+			// var sRootPath = sap.ui.require.toUrl("BasicControls/BasicControls/icon/user.png");
 			var imageModel = new sap.ui.model.json.JSONModel({
 				path: sRootPath,
 			});
